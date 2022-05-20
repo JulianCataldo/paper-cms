@@ -2,10 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import mkdirp from 'mkdirp';
+import fs from 'fs/promises';
 
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import axios from 'axios';
 
 import { Server } from 'socket.io';
 import http from 'http';
@@ -76,6 +76,10 @@ export default async function init() {
   server.listen(PORT, () => {
     console.log(`[server]: Server is running at http://localhost:${PORT}`);
   });
+
+  if (process.env.DEMO_MODE !== undefined) {
+    setupDemoMode();
+  }
 }
 
 init();
@@ -98,6 +102,16 @@ function setupLiveReload(app) {
     res.send('reload');
   });
   return server;
+}
+
+function setupDemoMode() {
+  setInterval(async () => {
+    const files = await glob('./.data/**/*.*');
+    files.forEach((file) => {
+      fs.rm(file);
+    });
+    console.log(files);
+  }, 3600 * 1000 * 24);
 }
 
 // import { compile, compileFromFile } from 'json-schema-to-typescript';
