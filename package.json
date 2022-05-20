@@ -28,6 +28,7 @@
     "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
     "prepare": "husky install",
     "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build",
+    "dcd:std": "docker compose -f ./docker/std/docker-compose.yml down",
     "release": "standard-version && git push --follow-tags origin master",
     "test": "echo 'launching tests…'"
   },
