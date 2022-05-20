@@ -16,6 +16,8 @@
   "description": "A document-based headless CMS with API + back office",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
+    "test": "echo 'launching tests…'",
     "deps:i": "npm i pnpm && pnpm -r i",
     "clean": "rm -rf ./.public",
     "clean:a": "rm -rf ./.public ./.data",
@@ -26,14 +28,13 @@
     "server:b": "pnpm esbuild --platform=node --format=esm --bundle ./server/index.js --pure:console.log --external:./server/node_modules/* --minify --outfile=./.dist/server/bundle.js",
     "live-reload": "nodemon -w ./.public -x \"curl localhost:${PORT:-7777}/reload\"",
     "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
-    "prepare": "husky install",
     "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build",
     "dcd:std": "docker compose -f ./docker/std/docker-compose.yml down",
-    "release": "standard-version && git push --follow-tags origin master",
-    "test": "echo 'launching tests…'"
+    "release": "standard-version && git push --follow-tags origin master"
   },
   "dependencies": {
     "esbuild": "^0.14.39",
+    "fs-extra": "^10.1.0",
     "nodemon": "^2.0.16",
     "pnpm": "^7.1.0"
   },

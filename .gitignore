@@ -1,6 +1,7 @@
 node_modules
 .old
 .data
+.data-demo-fresh
 .env
 .DS_Store
 .public

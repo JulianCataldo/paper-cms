@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import mkdirp from 'mkdirp';
-import fs from 'fs/promises';
+
+import fse from 'fs-extra';
 
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
@@ -20,11 +21,14 @@ import setupGetAll from './ctx/get-all.js';
 import setupGetSingle from './ctx/get-single.js';
 import setupSave from './ctx/save.js';
 import setupDelete from './ctx/delete.js';
-import glob from 'glob-promise';
 
-process.env.DATA_DIR = process.env.DATA_DIR
-  ? process.env.DATA_DIR + '/.data'
-  : './.data';
+if (process.env.DEMO_MODE === 'true') {
+  process.env.DATA_DIR = './.data-demo-fresh';
+} else {
+  process.env.DATA_DIR = process.env.DATA_DIR
+    ? process.env.DATA_DIR + '/.data'
+    : './.data';
+}
 process.env.TOKEN_SECRET = process.env.TOKEN_SECRET || 'top_secret';
 process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password';
 process.env.PORT = process.env.PORT || 7777;
@@ -34,6 +38,10 @@ export default async function init() {
   console.log('Starting API…', process.cwd());
 
   dotenv.config();
+
+  if (process.env.DEMO_MODE === 'true') {
+    await setupDemoMode();
+  }
 
   const app = express();
   app.use(express.json());
@@ -76,10 +84,6 @@ export default async function init() {
   server.listen(PORT, () => {
     console.log(`[server]: Server is running at http://localhost:${PORT}`);
   });
-
-  if (process.env.DEMO_MODE !== undefined) {
-    setupDemoMode();
-  }
 }
 
 init();
@@ -104,14 +108,17 @@ function setupLiveReload(app) {
   return server;
 }
 
-function setupDemoMode() {
+async function setupDemoMode() {
+  async function reset() {
+    const srcDir = `./.data-demo`;
+    const destDir = `./.data-demo-fresh`;
+    await fse.copy(srcDir, destDir);
+  }
+  reset();
+
   setInterval(async () => {
-    const files = await glob('./.data/**/*.*');
-    files.forEach((file) => {
-      fs.rm(file);
-    });
-    console.log(files);
-  }, 3600 * 1000 * 24);
+    reset();
+  }, 3600 * 1000 * 12);
 }
 
 // import { compile, compileFromFile } from 'json-schema-to-typescript';
