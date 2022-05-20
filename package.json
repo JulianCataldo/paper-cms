@@ -1,6 +1,6 @@
 {
   "name": "paper-cms",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "ISC",
   "author": "Julian Cataldo",
   "homepage": "www.juliancataldo.com",
@@ -28,7 +28,7 @@
     "prepare": "husky install",
     "test": "echo 'launching tests…'",
     "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build",
-    "release": "standard-version"
+    "release": "standard-version && git push --follow-tags origin master"
   },
   "dependencies": {
     "esbuild": "^0.14.39",
