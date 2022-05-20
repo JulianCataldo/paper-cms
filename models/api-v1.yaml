@@ -1,0 +1,285 @@
+# openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: CMS
+servers:
+  - url: http://localhost:7777/v1
+paths:
+  WebSite: ''
+  Person: ''
+  WebPage: ''
+  WebPageElement: ''
+  CreativeWork: ''
+  Organization: ''
+  MediaObject: ''
+  Collection: ''
+  SocialMediaPosting: ''
+  User: ''
+
+components:
+  schemas:
+    WebPage:
+      title: Web page
+      properties:
+        name:
+          title: Name
+          'ui:autofocus': true
+          type: string
+        url:
+          title: URL
+          type: string
+        subType:
+          title: Sub type
+          type: string
+          default: Default
+          enum:
+            - Default
+            - Collection
+            - Item
+            - ProfilePage
+            - ContactPage
+            - Custom
+        hasPart:
+          title: Parts
+          items:
+            'ui:field': 'hyperlink'
+            properties:
+              '$ref':
+                type: string
+                pattern: '/(WebPageElement)/(.*).json'
+            additionalProperties: false
+            type: object
+            required:
+              - '$ref'
+          type: array
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - name
+        - subType
+        - url
+        - _meta
+
+    WebSite:
+      title: Web site
+      properties:
+        name:
+          title: Name
+          'ui:autofocus': true
+          type: string
+        url:
+          title: URL
+          type: string
+        description:
+          'ui:field': richText
+          title: Description
+          type: string
+        hasPart:
+          title: Pages
+          items:
+            'ui:field': 'hyperlink'
+            properties:
+              '$ref':
+                type: string
+                pattern: '/(WebPage)/(.*).json'
+            additionalProperties: false
+            type: object
+            required:
+              - '$ref'
+          type: array
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - name
+        - url
+        - _meta
+
+    WebPageElement:
+      title: Web page element
+      properties:
+        Text:
+          title: Text
+          'ui:field': richText
+          type: string
+        name:
+          title: Name
+          type: string
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    Person:
+      properties:
+        givenName:
+          title: Given name
+          'ui:autofocus': true
+          type: string
+        familyName:
+          title: Family name
+          type: string
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    Meta:
+      title: Metadata
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        updated:
+          type: string
+          format: date-time
+          readOnly: true
+        deleted:
+          type: string
+          format: date-time
+          readOnly: true
+      additionalProperties: false
+      type: object
+
+    CreativeWork:
+      title: Creative work
+      properties:
+        Name:
+          'ui:autofocus': true
+          type: string
+        Author:
+          items:
+            'ui:field': 'hyperlink'
+            properties:
+              '$ref':
+                type: string
+                pattern: '/(Person|Organization)/(.*).json'
+            additionalProperties: false
+            type: object
+            required:
+              - '$ref'
+          type: array
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    Collection:
+      properties:
+        name:
+          title: Name
+          'ui:autofocus': true
+          type: string
+        associatedMedia:
+          title: Associated medias
+          items:
+            'ui:field': 'hyperlink'
+            properties:
+              '$ref':
+                type: string
+                pattern: '/(MediaObject)/(.*).json'
+            additionalProperties: false
+            type: object
+            required:
+              - '$ref'
+          type: array
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    SocialMediaPosting:
+      title: Social media posting
+      properties:
+        url:
+          title: URL
+          type: string
+        articleBody:
+          title: Article body
+          'ui:autofocus': true
+          'ui:widget': 'textarea'
+          type: string
+        sharedContent:
+          title: Associated medias
+          items:
+            'ui:field': 'hyperlink'
+            properties:
+              '$ref':
+                type: string
+                pattern: '/(MediaObject)/(.*).json'
+            additionalProperties: false
+            type: object
+            required:
+              - '$ref'
+          type: array
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    MediaObject:
+      title: Media object
+      properties:
+        contentUrl:
+          'ui:field': 'fileUpload'
+          title: File URL
+          type: string
+          # format: uri
+
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    Organization:
+      properties:
+        name:
+          'ui:autofocus': true
+          type: string
+          title: Name
+          description: The name of a friend
+        email:
+          title: Email
+          type: string
+        brand:
+          title: Brand
+          type: string
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    User:
+      properties:
+        userName:
+          'ui:autofocus': true
+          title: User name
+          type: string
+        password:
+          title: Password
+          type: string
+          format: password
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta

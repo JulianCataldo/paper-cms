@@ -1,0 +1,9 @@
+node_modules
+.old
+.data
+.env
+.DS_Store
+.public
+docker
+Makefile
+.vscode
