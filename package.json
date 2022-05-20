@@ -26,7 +26,8 @@
     "live-reload": "nodemon -w ./.public -x 'curl localhost:7777/reload'",
     "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
     "prepare": "husky install",
-    "test": "echo 'launching tests…'"
+    "test": "echo 'launching tests…'",
+    "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build"
   },
   "dependencies": {
     "esbuild": "^0.14.39",

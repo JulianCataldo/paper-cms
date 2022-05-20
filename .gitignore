@@ -4,6 +4,7 @@ node_modules
 .env
 .DS_Store
 .public
-docker
+docker/.volume
+docker/bundle
 Makefile
 .vscode
