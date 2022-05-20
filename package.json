@@ -1,6 +1,6 @@
 {
   "name": "paper-cms",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "ISC",
   "author": "Julian Cataldo",
   "homepage": "www.juliancataldo.com",
@@ -27,7 +27,8 @@
     "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
     "prepare": "husky install",
     "test": "echo 'launching tests…'",
-    "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build"
+    "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build",
+    "release": "standard-version"
   },
   "dependencies": {
     "esbuild": "^0.14.39",
@@ -43,7 +44,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "standard-version": "^9.5.0"
   },
   "commitlint": {
     "//": "build | chore | ci | docs | feat | fix | perf | refactor | revert | style | test",
