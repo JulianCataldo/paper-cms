@@ -2,7 +2,7 @@
 
 A document-based headless CMS with API + back office.
 
-Made for low interactivity content management.  
+Made primarly for editorial content management.  
 Stock definitions are modelled after Schema.org vocabulary.
 
 ## Live demo
@@ -53,6 +53,7 @@ tree ./docker/std/.volume/.data
 
 - Auto-generated forms from OpenAPI definitions
 - JSON Schema validation on run-time for both client and server
+- UI Schema augmentation (non-standard)
 - JSON files database
 - Image(s) upload + dynamic resize while fetching + caching
 - JWT authentication for both human editors and API consumers
@@ -73,23 +74,23 @@ world like:
 - Shared entities vocabularies
 - Automatic web form generation
 - Isomorphic user input runtime validation,
-- Document based information architecture
-- Headless non-opinionated APIs
-- Hypermedia for non-deterministic data fetching
-- Plain files data storage for operations convenience (with trade-offs)
+- Entity / Collection oriented information architecture
+- Headless non-opinionated CMS APIs for JAMStack consumption
+- Hypermedia for non-deterministic data fetching via _refs. | links | URIs_…
+- Plain files data storage for operations convenience (with some trade-offs)
 
 All these concepts are explored at different levels of implementations
 in Paper CMS.  
-The endgoal is to provide a lightweight solution that might be suitable
-for relatively static web sites like :
+While it's still an experiment, the endgoal is to provide a lightweight
+solution suitable for projects which :
 
-- Ten-ish max. editors in charge
-- Few concurrent document edition
+- Has ten-ish max. editors in charge
+- Needs moderate authoring concurrency with silo-ed document edits
 - Might needs frequent content updates
 - Low needs for user-land data input
 
-To sum up: good for **editors-driven websites** but not a good fit for
-**users-driven web apps**.
+To sum up: Paper CMS is good for **editors-driven websites**, but is not a
+good fit for **users-driven web apps**.
 
 ## Major dependencies
 
@@ -128,11 +129,12 @@ Mono-repo. glued with PNPM recursive modules installation.
 
 ### Features ideas
 
-- Might propose fully dynamic OpenAPI GUI builder right inside the back office
-  instead or alongside YAML config.
-- Might propose MongoDB/pSQL alternative to bare file storage,
+- Might propose fully dynamic OpenAPI GUI builder right inside the back office,
+  instead OR alongside YAML config.
+- Might propose MongoDB/pSQL/S3 alternative to bare file storage,
   for increased **mass** and/or **concurrency** needs,
   but decreased portability.
+- Might propose an option for storing media binaries in an S3 bucket.
 
 ---
 
