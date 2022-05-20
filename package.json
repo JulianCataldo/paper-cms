@@ -24,7 +24,9 @@
     "server:w": "pnpm nodemon -e js,yaml ./server/index.js -w ./server -w ./client/base-html.js  -w ./models",
     "server:b": "pnpm esbuild --platform=node --format=esm --bundle ./server/index.js --pure:console.log --external:./server/node_modules/* --minify --outfile=./.dist/server/bundle.js",
     "live-reload": "nodemon -w ./.public -x 'curl localhost:7777/reload'",
-    "dev": "pnpm server:w & pnpm client:w & pnpm live-reload"
+    "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
+    "prepare": "husky install",
+    "test": "echo 'launching tests…'"
   },
   "dependencies": {
     "esbuild": "^0.14.39",
@@ -36,5 +38,10 @@
   },
   "engines": {
     "node": "17.9"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
+    "husky": "^8.0.0"
   }
 }
