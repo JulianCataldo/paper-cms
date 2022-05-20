@@ -152,10 +152,10 @@ components:
     CreativeWork:
       title: Creative work
       properties:
-        Name:
+        name:
           'ui:autofocus': true
           type: string
-        Author:
+        author:
           items:
             'ui:field': 'hyperlink'
             properties:
