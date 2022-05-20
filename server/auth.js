@@ -35,7 +35,7 @@ export default function setupAuth({ app, ajv, config }) {
 
     if (
       req.body.userName === 'admin' &&
-      req.body.password === (process.env.ADMIN_PASSWORD || 'password')
+      req.body.password === process.env.ADMIN_PASSWORD
       // entries.find((e) => {
       //   e.userName === "admin"req.body.userName;
       // })
@@ -56,7 +56,7 @@ export default function setupAuth({ app, ajv, config }) {
   });
 
   function generateAccessToken(creds, illimited = false) {
-    return jwt.sign(creds, process.env.TOKEN_SECRET || 'top_secret', {
+    return jwt.sign(creds, process.env.TOKEN_SECRET, {
       ...(illimited ? {} : { expiresIn: '6600s' }),
     });
   }
@@ -71,7 +71,7 @@ export default function setupAuth({ app, ajv, config }) {
   console.log({ frontToken });
 
   return expressjwt({
-    secret: process.env.TOKEN_SECRET || 'top_secret',
+    secret: process.env.TOKEN_SECRET,
     algorithms: ['HS256'],
   });
 }
