@@ -20,11 +20,13 @@ import setupGetAll from './ctx/get-all.js';
 import setupGetSingle from './ctx/get-single.js';
 import setupSave from './ctx/save.js';
 import setupDelete from './ctx/delete.js';
+import glob from 'glob-promise';
 
 process.env.DATA_DIR = process.env.DATA_DIR
   ? process.env.DATA_DIR + '/.data'
   : './.data';
-
+process.env.TOKEN_SECRET = process.env.TOKEN_SECRET || 'top_secret';
+process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password';
 process.env.PORT = process.env.PORT || 7777;
 const PORT = process.env.PORT;
 
