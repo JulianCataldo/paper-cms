@@ -3,13 +3,14 @@
   "version": "0.0.3",
   "license": "ISC",
   "author": "Julian Cataldo",
-  "homepage": "www.juliancataldo.com",
+  "homepage": "www.JulianCataldo.com",
   "keywords": [
     "JSON Schema",
     "OpenAPI",
     "Schema.org",
     "MUI",
     "React",
+    "Headless",
     "CMS"
   ],
   "description": "A document-based headless CMS with API + back office",
@@ -23,12 +24,12 @@
     "server": "NODE_ENV=production node ./server",
     "server:w": "pnpm nodemon -e js,yaml ./server/index.js -w ./server -w ./client/base-html.js  -w ./models",
     "server:b": "pnpm esbuild --platform=node --format=esm --bundle ./server/index.js --pure:console.log --external:./server/node_modules/* --minify --outfile=./.dist/server/bundle.js",
-    "live-reload": "nodemon -w ./.public -x 'curl localhost:7777/reload'",
+    "live-reload": "nodemon -w ./.public -x \"curl localhost:${PORT:-7777}/reload\"",
     "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
     "prepare": "husky install",
-    "test": "echo 'launching tests…'",
     "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build",
-    "release": "standard-version && git push --follow-tags origin master"
+    "release": "standard-version && git push --follow-tags origin master",
+    "test": "echo 'launching tests…'"
   },
   "dependencies": {
     "esbuild": "^0.14.39",
