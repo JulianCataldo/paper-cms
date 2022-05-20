@@ -7,7 +7,5 @@ services:
       dockerfile: ./docker/std/Dockerfile
     volumes:
       - ./.volume/.data:/usr/app/.data
-      # - ./.volume/.dist:/usr/app/.dist
-      # - ./.volume/.public:/usr/app/.public
     ports:
       - 127.0.0.1:7777:7777

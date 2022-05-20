@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  paper-cms:
+    build:
+      context: ../../
+      dockerfile: ./docker/std/Dockerfile
+    volumes:
+      - ./.volume/.data:/usr/app/.data
+    networks:
+      - internal
+      - rproxy_daemon
+    environment:
+      DEMO_MODE: 'true'
+    labels:
+      - traefik.docker.network=rproxy_daemon
+      - traefik.http.routers.paper-cms.rule=Host(`${SITE_HOST:?}`)
+
+      - traefik.http.routers.paper-cms.entrypoints=websecure
+      # - traefik.http.routers.paper-cms.tls=true
+      - traefik.http.routers.paper-cms.tls.certresolver=myresolver
+      - traefik.http.services.paper-cms.loadbalancer.server.port=${PORT:-7777}
+
+networks:
+  internal:
+    driver: bridge
+  rproxy_daemon:
+    external: true
