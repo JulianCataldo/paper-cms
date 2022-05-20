@@ -1,7 +1,5 @@
 import { html } from './lib/html-tag.js';
 
-const PORT = process.env.PORT || 7777;
-
 export default function baseHtml() {
   return html`<!DOCTYPE html>
     <html lang="en">
