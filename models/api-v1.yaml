@@ -124,6 +124,9 @@ components:
         familyName:
           title: Family name
           type: string
+        email:
+          title: Email
+          type: string
         _meta:
           '$ref': '#/$defs/Meta'
       additionalProperties: false

@@ -89,7 +89,7 @@ tree ./docker/std/.volume/.data
 
 ## Auto-generated forms from OpenAPI definitions
 
-…
+https://user-images.githubusercontent.com/603498/169503745-7be7124c-5d47-4170-85fb-e32d4ada58bd.mp4
 
 ## JSON Schema validation on run-time for both client and server
 
