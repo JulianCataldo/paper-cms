@@ -52,8 +52,12 @@ export default function setupSave({
           });
       }
 
+      const revisionsSanitized = JSON.stringify(revisions, null, 2)
+        .replace(/<.*script.*>(.*)<.*script.*>/g, '◎')
+        .replace(/<.*href.*javascript:.*>.*<.*>/g, '◉');
+
       await fs
-        .writeFile(path, JSON.stringify(revisions, null, 2))
+        .writeFile(path, revisionsSanitized)
         .then(() => {
           res.status(201).send({ success: true, response: { entryId } });
         })
