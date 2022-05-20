@@ -40,14 +40,21 @@ code ./models/api-v1.yaml -r
 tree ./.data
 ```
 
-> ⚠️ Work in progress: **NOT FOR PRODUCTION** ⚠️
+## or… with Docker Compose 🐳
+
+```sh
+npm run dcu:std
+
+# Data persistence folder
+tree ./docker/std/.volume/.data
+```
 
 ## Features
 
 - Auto-generated forms from OpenAPI definitions
 - JSON Schema validation on run-time for both client and server
 - JSON files database
-- Image upload + dynamic resize while fetching + caching
+- Image(s) upload + dynamic resize while fetching + caching
 - JWT authentication for both human editors and API consumers
 - Live browser reload while editing models / client / server
 - Document revisions history
@@ -55,6 +62,7 @@ tree ./.data
 - Nested referenced documents edition
 - Schema.org inspired default definitions
 - OpenAPI 3 UI (Swagger)
+- Wysiwyg HTML Editor
 - Custom fields and widgets
 
 ## Why?
@@ -89,12 +97,15 @@ To sum up: good for **editors-driven websites** but not a good fit for
 - ESBuild
 - React
 - MUI
+- React Quill
 - JSON Schema React
 - AJV
 - Express
 - Sharp
 
-## Project
+## Project insights
+
+> ⚠️ Work in progress: **NOT FOR PRODUCTION** ⚠️
 
 ### Structure
 
