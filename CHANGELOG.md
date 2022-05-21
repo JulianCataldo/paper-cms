@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/JulianCataldo/paper-cms/compare/v0.0.4...v0.0.5) (2022-05-21)
+
+
+### Features
+
+* demo data ([fe616b7](https://github.com/JulianCataldo/paper-cms/commit/fe616b7af50fa1886fdd9b0da477190ea7078a07))
+* demo mode ([ceb243c](https://github.com/JulianCataldo/paper-cms/commit/ceb243ccb4f9204845757d6aea7fa09c6031d282))
+
+
+### Bug Fixes
+
+* model field req ([6279d38](https://github.com/JulianCataldo/paper-cms/commit/6279d386a3eb2baaf322ab4ca83ac6716be5d7b4))
+* raw json ([d824930](https://github.com/JulianCataldo/paper-cms/commit/d8249303b7e624c273ce3eebd1377b0a53f7bb1d))
+
 ### [0.0.4](https://github.com/JulianCataldo/paper-cms/compare/v0.0.3...v0.0.4) (2022-05-20)
 
 ### [0.0.3](https://github.com/JulianCataldo/paper-cms/compare/v0.0.2...v0.0.3) (2022-05-20)
