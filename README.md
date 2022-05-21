@@ -19,11 +19,11 @@ Stock definitions are modelled after Schema.org vocabulary.
   - [JSON files database](#json-files-database)
   - [Image(s) upload + dynamic resize while fetching + caching](#images-upload--dynamic-resize-while-fetching--caching)
   - [JWT authentication for both human editors and API consumers](#jwt-authentication-for-both-human-editors-and-api-consumers)
-  - [Live browser reload while editing models / client / server](#live-browser-reload-while-editing-models--client--server)
+  - [Full live reload for models / client / server](#full-live-reload-for-models--client--server)
   - [Document revisions history](#document-revisions-history)
   - [Soft deletion, restore from trash](#soft-deletion-restore-from-trash)
   - ["Has many" relationship via references](#has-many-relationship-via-references)
-  - [Nested referenced documents edition](#nested-referenced-documents-edition)
+  - [Nested referenced documents editing](#nested-referenced-documents-editing)
   - [Schema.org inspired default definitions](#schemaorg-inspired-default-definitions)
   - [OpenAPI 3 UI (Swagger)](#openapi-3-ui-swagger)
   - [Wysiwyg HTML Editor](#wysiwyg-html-editor)
@@ -122,7 +122,9 @@ Standard compliant JSON Schema alongside non standard UI Schema.
 
 ## JSON files database
 
-…
+All your textual data is hosted unded `./data/docs` (root can be overriden with `DATA_DIR`).  
+Run multiple instances of Paper CMS easily by setting different `PORT`.  
+Quickly swip datasets : demo / tests / staging / production…
 
 ## Image(s) upload + dynamic resize while fetching + caching
 
@@ -132,9 +134,12 @@ Standard compliant JSON Schema alongside non standard UI Schema.
 
 https://user-images.githubusercontent.com/603498/169494704-6ee7afcb-31f5-4cc5-b126-e109bd24606f.mp4
 
-## Live browser reload while editing models / client / server
+## Full live reload for models / client / server
 
-…
+When editing **model** definitions, **server** or **client** code, everything is re-runs / re-builded
+and browser is automatically refreshed, thanks to a long polling web socket.
+
+You can also trigger browser refresh by hitting `curl localhost:${PORT:-7777}/reload`.
 
 ## Document revisions history
 
@@ -148,17 +153,29 @@ https://user-images.githubusercontent.com/603498/169494704-6ee7afcb-31f5-4cc5-b1
 
 …
 
-## Nested referenced documents edition
+## Nested referenced documents editing
 
 …
 
 ## Schema.org inspired default definitions
 
-…
+While [Schema.org](https://schema.org/docs/datamodel.html) states that:
+
+> The type hierarchy presented on this site is not intended to be a 'global ontology' of the world.
+
+It can be a great starting point, with commonly used taxonomies / relationships.  
+Schema.org is shining for content-driven web sites where SEO is crucial (but that's just an excuse).  
+While still in its infancy, JSON/LD is already bringing [HATEOS](https://en.wikipedia.org/wiki/HATEOAS) concepts
+into real-life applications, step-by-step, organically.
+Feature-rich widgets will democratize and data crawling between third-parties is becoming more insightful.
 
 ## OpenAPI 3 UI (Swagger)
 
-…
+The endgoal is to make Paper CMS a non-deterministic data ingestion / organization / retrieval
+system.  
+At the end, an hypermedia API should be auto-discoverable.  
+Still, it's useful to rely on Swagger niceties for on-boarding an API.  
+Moreover, the OpenAPI 3 specs is adding `links`, a notable concept for [Hypermedia minded APIs](https://swagger.io/docs/specification/links/).
 
 ## Wysiwyg HTML Editor
 
@@ -182,6 +199,7 @@ world like:
 - Headless non-opinionated CMS APIs for JAMStack consumption
 - Hypermedia for non-deterministic data fetching via _refs. | links | URIs_…
 - Plain files data storage for operations convenience (with some trade-offs)
+- Conventions over configuration, with extendabilities (models, widgets…)
 
 ## Goals
 
@@ -194,7 +212,7 @@ solution suitable for projects which:
 - Needs moderate authoring concurrency with silo-ed document edits
 - Might needs frequent content updates
 - Low needs for user-land data input
-- Convention over Configuration with extendabilities (models, widgets…)
+- Are in an eco-system of focused services where caching / CDNs / whatever are dedicated
 
 To sum up: Paper CMS is good for **editors-driven web sites**, but is not a
 good fit for **users-driven web apps**.
