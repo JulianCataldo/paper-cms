@@ -21,6 +21,7 @@ Stock definitions are modelled after Schema.org vocabulary.
   - [JWT authentication for both human editors and API consumers](#jwt-authentication-for-both-human-editors-and-api-consumers)
   - [Live browser reload while editing models / client / server](#live-browser-reload-while-editing-models--client--server)
   - [Document revisions history](#document-revisions-history)
+  - [Soft deletion, restore from trash](#soft-deletion-restore-from-trash)
   - ["Has many" relationship via references](#has-many-relationship-via-references)
   - [Nested referenced documents edition](#nested-referenced-documents-edition)
   - [Schema.org inspired default definitions](#schemaorg-inspired-default-definitions)
@@ -69,7 +70,7 @@ open http://localhost:7777
 # > Password : `password`
 
 # Edit API definition
-code ./models/api-v1.yaml -r
+code -r ./models/api-v1.yaml
 
 # Created entries and uploaded medias + variations
 # are stored in root project by default in `.data`
@@ -97,7 +98,15 @@ https://user-images.githubusercontent.com/603498/169503745-7be7124c-5d47-4170-85
 
 ## UI Schema augmentation (non-standard)
 
-…
+https://user-images.githubusercontent.com/603498/169630096-ce777a5d-15ad-41d7-9360-aea9791d7616.mp4
+
+Pure JSON Schema isn't designed (yet?) for declarative UI parameters.  
+Special dialects to cater for this are experimented here and here.  
+In Paper CMS, we're using `react-jsonschema-form` so see  
+➠ [General uiSchema Reference - react-jsonschema-form documentation](https://react-jsonschema-form.readthedocs.io/en/latest/api-reference/uiSchema/)
+
+Settings are splitted in two different schemas at runtime.  
+Standard compliant JSON Schema alongside non standard UI Schema.
 
 ## JSON files database
 
@@ -116,6 +125,10 @@ https://user-images.githubusercontent.com/603498/169494704-6ee7afcb-31f5-4cc5-b1
 …
 
 ## Document revisions history
+
+…
+
+## Soft deletion, restore from trash
 
 …
 
@@ -170,7 +183,7 @@ solution suitable for projects which:
 - Might needs frequent content updates
 - Low needs for user-land data input
 
-To sum up: Paper CMS is good for **editors-driven websites**, but is not a
+To sum up: Paper CMS is good for **editors-driven web sites**, but is not a
 good fit for **users-driven web apps**.
 
 # ℹ️  Project insights
@@ -197,15 +210,17 @@ Mono-repo. glued with PNPM recursive modules installation.
 
 - Single media management
 - Batch media management
-- Media metadata with EXIF + IPTC support
 - JSON/LD API output conformance
 - OpenAPI conformance
 - Swagger integration
 - Wider Schema.org support for stock definitions
+- Basic users account management
 
 ## To do
 
+- Media metadata with EXIF + IPTC support
 - API collections' pagination
+- Automatic bi-directional relationships ("Is part of many" <=> "Has many")
 - Custom data fetching and population widgets for APIs / social networks content retrieval
 
 ## Features ideas
@@ -219,36 +234,29 @@ Mono-repo. glued with PNPM recursive modules installation.
 
 ---
 
-```
+```powershell
 
-      ,-.----.                  ,-.----.
-      \    /  \     ,---,       \    /  \      ,---,.,-.----.
-      |   :    \   '  .' \      |   :    \   ,'  .' |\    /  \
-      |   |  .\ : /  ;    '.    |   |  .\ :,---.'   |;   :    \
-      .   :  |: |:  :       \   .   :  |: ||   |   .'|   | .\ :
-      |   |   \ ::  |   /\   \  |   |   \ ::   :  |-,.   : |: |
-      |   : .   /|  :  ' ;.   : |   : .   /:   |  ;/||   |  \ :
-      ;   | |`-' |  |  ;/  \   \;   | |`-' |   :   .'|   : .  /
-      |   | ;    '  :  | \  \ ,'|   | ;    |   |  |-,;   | |  \
-      :   ' |    |  |  '  '--'  :   ' |    '   :  ;/||   | ;\  \
-      :   : :    |  :  :        :   : :    |   |    \:   ' | \.'
-      |   | :    |  | ,'        |   | :    |   :   .':   : :-'
-      `---'.|    `--''          `---'.|    |   | ,'  |   |.'
-        `---`                     `---`    `----'    `---'
-                                                        ____
-                                    ,----..          ,'  , `.  .--.--.
-                                    /   /   \      ,-+-,.' _ | /  /    '.
-                                  |   :     :  ,-+-. ;   , |||  :  /`. /
-                                  .   |  ;. / ,--.'|'   |  ;|;  |  |--`
-                                  .   ; /--` |   |  ,', |  ':|  :  ;_
-                                  ;   | ;    |   | /  | |  || \  \    `.
-                                  |   : |    '   | :  | :  |,  `----.   \
-                                  .   | '___ ;   . |  ; |--'   __ \  \  |
-                                  '   ; : .'||   : |  | ,     /  /`--'  /
-                                  '   | '/  :|   : '  |/     '--'.     /
-                                  |   :    / ;   | |`-'        `--'---'
-                                    \   \ .'  |   ;/
-                                    `---`    '---'
+    ,ggggggggggg,
+    dP""88""""""Y8,
+    Yb, 88      `8b
+    `"  88      ,8P
+        88aaaad8P"
+        88""""",gggg,gg  gg,gggg,     ,ggg,    ,gggggg,
+        88    dP"  "Y8I  I8P"  "Yb   i8" "8i   dP""""8I
+        88   i8'    ,8I  I8'    ,8i  I8, ,8I  ,8'    8I
+        88  ,d8,   ,d8b,,I8 _  ,d8'  `YbadP' ,dP     Y8,
+        88  P"Y8888P"`Y8PI8 YY88888P888P"Y8888P      `Y8
+                          I8
+                          I8       ,gggg,   ,ggg, ,ggg,_,ggg,        ,gg,
+                          I8     ,88"""Y8b,dP""Y8dP""Y88P""Y8b      i8""8i
+                          I8    d8"     `Y8Yb, `88'  `88'  `88      `8,,8'
+                          I8   d8'   8b  d8 `"  88    88    88       `88'
+                          I8  ,8I    "Y88P'     88    88    88       dP"8,
+                              I8'               88    88    88      dP' `8a
+                              d8                88    88    88     dP'   `Yb
+                              Y8,               88    88    88 _ ,dP'     I8
+                              `Yba,,_____,      88    88    Y8,"888,,____,dP
+                                `"Y8888888      88    88    `Y8a8P"Y88888P"
 
 ```
 
