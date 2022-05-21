@@ -12,6 +12,7 @@ Stock definitions are modelled after Schema.org vocabulary.
   - [Live demo](#live-demo)
   - [or… local quick start 📦](#or-local-quick-start-)
   - [or… with Docker Compose 🐳](#or-with-docker-compose-)
+- [Some views  👀](#some-views)
 - [❄️  Features](#️features)
   - [Auto-generated forms from OpenAPI definitions](#auto-generated-forms-from-openapi-definitions)
   - [JSON Schema validation on run-time for both client and server sides](#json-schema-validation-on-run-time-for-both-client-and-server-sides)
@@ -85,6 +86,12 @@ npm run dcu:std
 # Data persistence folder
 tree ./docker/std/.volume/.data
 ```
+
+# Some views  👀
+
+![](docs/screencaps/collection.png)
+![](docs/screencaps/document-form.png)
+![](docs/screencaps/nested-ref-form.png)
 
 # ❄️  Features
 
@@ -179,7 +186,12 @@ Moreover, the OpenAPI 3 specs is adding `links`, a notable concept for [Hypermed
 
 ## Wysiwyg HTML Editor
 
-…
+https://user-images.githubusercontent.com/603498/169635232-eff07d67-4336-491a-8221-c60d79678e8c.mp4
+
+---
+
+For rich text editing, Paper CMS uses [Quill](https://github.com/quilljs/quill) under the hood.  
+Basic additional HTML sanitization is done server-side.
 
 ## Custom fields and widgets
 
