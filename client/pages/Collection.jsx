@@ -45,6 +45,7 @@ export default function CollectionPage({}) {
   }
 
   const [tableData, setTableData] = useState([]);
+
   useEffect(() => {
     getTableData();
   }, [collection]);

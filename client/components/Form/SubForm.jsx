@@ -53,7 +53,7 @@ export default function SubForm(props) {
   function newEntry(type) {
     setCurrentEntry({ type, id: 'new' });
     props.onChange({
-      $ref: ``,
+      $ref: '',
     });
     toggleModal();
   }

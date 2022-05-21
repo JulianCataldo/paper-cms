@@ -7,6 +7,7 @@ import {
   Typography,
   Zoom,
 } from '@mui/material';
+import { Lock } from '@mui/icons-material';
 import React, { useState } from 'react';
 
 import axios from 'axios';
@@ -52,7 +53,12 @@ export default function LoginPage({}) {
     required: ['userName', 'password'],
   };
   const uiSchema = {
-    'ui:title': 'Please enter your credentials',
+    'ui:title': (
+      <>
+        <Lock sx={{ mr: 2 }} />
+        Please enter your credentials
+      </>
+    ),
     // 'ui:description': 'Description',
     userName: {
       // 'ui:title': 'User name',

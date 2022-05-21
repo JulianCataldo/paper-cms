@@ -33,7 +33,7 @@ export default function FileUploader(props) {
       {JSON.stringify(props)}
       <Typography variant="h5">{props.schema.title}</Typography>
       <Container>
-        <div>Salut {props.formData}</div>
+        {/* <div>Salut {props.formData}</div> */}
         <Box
           component="img"
           sx={{

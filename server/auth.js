@@ -7,7 +7,7 @@ export default function setupAuth({ app, ajv, config }) {
   app.post('/v1/login', async (req, res) => {
     console.log(req.body);
 
-    const files = await glob(process.env.DATA_DIR + `/docs/User/*`);
+    const files = await glob(`${process.env.DATA_DIR}/docs/User/*`);
     console.log({ files });
 
     // const promises = [];
@@ -66,9 +66,11 @@ export default function setupAuth({ app, ajv, config }) {
       userName: 'front',
       password: 'frontfrontfront',
     },
-    true
+    true,
   );
+  console.log('==PERMANENT JWT TOKEN for server side API use ONLY==');
   console.log({ frontToken });
+  console.log('====================================================');
 
   return expressjwt({
     secret: process.env.TOKEN_SECRET,

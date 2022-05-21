@@ -7,25 +7,24 @@ import multer from 'multer';
 
 export default function setupUpload({ app }) {
   const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, process.env.DATA_DIR + '/bin/');
+    destination(req, file, cb) {
+      cb(null, `${process.env.DATA_DIR}/bin/`);
     },
-    filename: function (req, file, cb) {
-      const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      cb(null, uniquePrefix + '_' + file.originalname);
+    filename(req, file, cb) {
+      const uniquePrefix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `${uniquePrefix}_${file.originalname}`);
     },
   });
 
-  mkdirp(process.env.DATA_DIR + '/bin/resized/');
+  mkdirp(`${process.env.DATA_DIR}/bin/resized/`);
 
   app.get('/media/:file', async function (req, res) {
     const width = req.query['w'] || 'o';
 
-    const resizedFilePath =
-      process.env.DATA_DIR + '/bin/resized/w' + width + '_' + req.params.file;
+    const resizedFilePath = `${process.env.DATA_DIR}/bin/resized/w${width}_${req.params.file}`;
 
     const ext = path.extname(req.params.file).substring(1);
-    res.set('Content-Type', 'image/' + ext);
+    res.set('Content-Type', `image/${ext}`);
 
     if (fsSync.existsSync(resizedFilePath)) {
       console.log('resized exists');
@@ -34,7 +33,7 @@ export default function setupUpload({ app }) {
     } else {
       console.log('resizing…');
       const fileContent = await fs.readFile(
-        process.env.DATA_DIR + '/bin/' + req.params.file
+        `${process.env.DATA_DIR}/bin/${req.params.file}`
       );
       const size = [parseInt(width) || null, null];
       const fileResized = await sharp(fileContent)
@@ -45,10 +44,10 @@ export default function setupUpload({ app }) {
     }
   });
 
-  const upload = multer({ storage: storage });
+  const upload = multer({ storage });
 
-  app.post('/v1/upload', upload.single('media'), function (req, res, next) {
+  app.post('/v1/upload', upload.single('media'), (req, res /* next */) => {
     console.log(req.file);
-    res.send({ success: true, url: '/media/' + req.file.filename });
+    res.send({ success: true, url: `/media/${req.file.filename}` });
   });
 }

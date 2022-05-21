@@ -53,7 +53,7 @@ export default function FormComponent({ collection, entryId = null }) {
     const res = await axios.post(
       `/v1/${collection}/${entryId}`,
       data.formData,
-      { headers }
+      { headers },
     );
     console.log(res.data);
 
@@ -147,7 +147,6 @@ export default function FormComponent({ collection, entryId = null }) {
       </label> */}
 
       <MuiForm5
-        //@ts-ignore
         schema={schemaFiltered}
         uiSchema={uiSchema}
         // widgets={widgets}
@@ -171,13 +170,11 @@ export default function FormComponent({ collection, entryId = null }) {
           label="Current revision"
           onChange={handleRevChange}
         >
-          {entryData?.map((e, key) => {
-            return (
-              <MenuItem key={key} value={key}>
-                {e._meta.updated || '📍 ' + e._meta.created}
-              </MenuItem>
-            );
-          })}
+          {entryData?.map((e, key) => (
+            <MenuItem key={key} value={key}>
+              {e._meta.updated || `📍 ${e._meta.created}`}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       {/* <Button onClick={sub}>{entryId === 'new' ? 'Save' : 'Update'}</Button> */}

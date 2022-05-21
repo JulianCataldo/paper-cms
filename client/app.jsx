@@ -22,7 +22,7 @@ async function init() {
         overlay.style.display = 'none';
       }, 500);
     });
-    return <>{children}</>;
+    return children;
   }
 
   const loggedIn = await initConf();
@@ -38,8 +38,8 @@ async function init() {
             <Route path="/settings" element={<HomePage />} />
             <Route path="/definitions" element={<HomePage />} />
             <Route path="/users" element={<HomePage />} />
-            <Route path={'/e/:collection'} element={<CollectionPage />} />
-            <Route path={'/e/:collection/:id'} element={<ItemPage />} />
+            <Route path="/e/:collection" element={<CollectionPage />} />
+            <Route path="/e/:collection/:id" element={<ItemPage />} />
           </Routes>
         </BrowserRouter>
       </App>
