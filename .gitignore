@@ -7,5 +7,5 @@ node_modules
 .public
 docker/.volume
 docker/bundle
-Makefile
 .vscode
+_opt

@@ -173,7 +173,19 @@ See the `api-v1.yaml` for full examples.
 
 ## Nested referenced documents editing
 
-…
+A "sub" document is just another document reference.  
+There is no hierarchy or inheritance,
+only cross-references betweens entities.  
+While you can create, edit or associate an existing document from the main document form,
+only `$refs` URI for child references actually gets recorded, not the entire subtree.
+
+Everything can be a document collection, as soon as it make sense to reference
+the entity from elsewhere. Self-sufficient data should live embedded
+in the document itself.
+
+There is no limit for nesting, though stacked modal editors force us
+to save only one (sub)document at a time: no full tree update propagation.
+This design choice is meant to prevent data-loss / infinite recursive nesting.
 
 ## Schema.org inspired default definitions
 
