@@ -30,7 +30,6 @@ export default function FileUploader(props) {
   }
   return (
     <>
-      {JSON.stringify(props)}
       <Typography variant="h5">{props.schema.title}</Typography>
       <Container>
         {/* <div>Salut {props.formData}</div> */}
