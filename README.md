@@ -89,7 +89,7 @@ make rdc-std
 tree ./docker/std/.volume/.data
 ```
 
-See the [Makefile](./docker/Makefile) for all containers variants and shorthands.
+See the [`Makefile`](./docker/Makefile) for all containers variants and shorthands.
 
 # Some views  👀
 
@@ -171,7 +171,7 @@ When using an array of items for a property, and thanks to a special:
 combined with a:  
 `pattern: '/(Person|Organization|Whatever)/(.*).json'`  
 you will get an "has-many" heterogeneous references dynamic widget.  
-See the `api-v1.yaml` for full examples.
+See the [`api-v1.yaml`](./models/api-v1.yaml) for full examples.
 
 ## Nested referenced documents editing
 

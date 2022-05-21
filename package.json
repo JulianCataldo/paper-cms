@@ -4,6 +4,7 @@
   "license": "ISC",
   "author": "Julian Cataldo",
   "homepage": "www.JulianCataldo.com",
+  "repository": "https://github.com/JulianCataldo/paper-cms",
   "keywords": [
     "JSON Schema",
     "OpenAPI",
