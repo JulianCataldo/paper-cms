@@ -260,6 +260,7 @@ components:
         email:
           title: Email
           type: string
+          format: email
         brand:
           title: Brand
           type: string
