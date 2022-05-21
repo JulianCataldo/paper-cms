@@ -10,6 +10,6 @@ services:
       dockerfile: ./docker/std/Dockerfile
     # volumes:
     # - ./.volume/.data:/usr/app/.data
-    # - ./.volume/.data-demo:/usr/app/.data
+    # - ./.volume/.data-demo:/usr/app/.data-demo
     ports:
       - 127.0.0.1:7777:7777
