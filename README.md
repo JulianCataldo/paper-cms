@@ -82,12 +82,14 @@ tree ./.data
 
 ```sh
 cd ./docker
-make dcu-std
+make rdc-std
 
 -
 # Data persistence folder
 tree ./docker/std/.volume/.data
 ```
+
+See the [Makefile](./docker/Makefile) for all containers variants and shorthands.
 
 # Some views  👀
 
@@ -145,8 +147,8 @@ https://user-images.githubusercontent.com/603498/169494704-6ee7afcb-31f5-4cc5-b1
 
 ## Full live reload for models / client / server
 
-When editing **model** definitions, **server** or **client** code, everything is re-runs / re-builded
-and browser is automatically refreshed, thanks to a long polling web socket.
+When editing **model** definitions, **server** or **client** code, everything is re-runned/builded/bundled.
+Also, browser is automatically refreshed thanks to a long polling web socket.
 
 You can also trigger browser refresh by hitting `curl localhost:${PORT:-7777}/reload`.
 
