@@ -81,8 +81,10 @@ tree ./.data
 ## or… with Docker Compose 🐳
 
 ```sh
-npm run dcu:std
+cd ./docker
+make dcu-std
 
+-
 # Data persistence folder
 tree ./docker/std/.volume/.data
 ```
@@ -158,7 +160,16 @@ You can also trigger browser refresh by hitting `curl localhost:${PORT:-7777}/re
 
 ## "Has many" relationship via references
 
-…
+https://user-images.githubusercontent.com/603498/169636447-e2b891c9-90dc-4603-9832-256ed09653ca.mp4
+
+---
+
+When using an array of items for a property, and thanks to a special:  
+`'ui:field': 'hyperlink'`  
+combined with a:  
+`pattern: '/(Person|Organization|Whatever)/(.*).json'`  
+you will get an "has-many" heterogeneous references dynamic widget.  
+See the `api-v1.yaml` for full examples.
 
 ## Nested referenced documents editing
 
@@ -170,11 +181,11 @@ While [Schema.org](https://schema.org/docs/datamodel.html) states that:
 
 > The type hierarchy presented on this site is not intended to be a 'global ontology' of the world.
 
-It can be a great starting point, with commonly used taxonomies / relationships.  
+While true, it provides a great starting point with commonly used taxonomies and entities relationships.  
 Schema.org is shining for content-driven web sites where SEO is crucial (but that's just an excuse).  
 While still in its infancy, JSON/LD is already bringing [HATEOS](https://en.wikipedia.org/wiki/HATEOAS) concepts
-into real-life applications, step-by-step, organically.
-Feature-rich widgets will democratize and data crawling between third-parties is becoming more insightful.
+into real-life applications, step-by-step, organically.  
+Regardless, feature-rich widgets are democratizing, and data crawling between third-parties is becoming more insightful.
 
 ## OpenAPI 3 UI (Swagger)
 
