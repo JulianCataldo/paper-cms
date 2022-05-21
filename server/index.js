@@ -26,13 +26,13 @@ if (process.env.DEMO_MODE === 'true') {
   process.env.DATA_DIR = './.data-demo-fresh';
 } else {
   process.env.DATA_DIR = process.env.DATA_DIR
-    ? process.env.DATA_DIR + '/.data'
+    ? `${process.env.DATA_DIR}/.data`
     : './.data';
 }
 process.env.TOKEN_SECRET = process.env.TOKEN_SECRET || 'top_secret';
 process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password';
 process.env.PORT = process.env.PORT || 7777;
-const PORT = process.env.PORT;
+const { PORT } = process.env;
 
 export default async function init() {
   console.log('Starting API…', process.cwd());
@@ -40,6 +40,7 @@ export default async function init() {
   dotenv.config();
 
   if (process.env.DEMO_MODE === 'true') {
+    console.log('Demo mode activated…');
     await setupDemoMode();
   }
 
@@ -109,16 +110,24 @@ function setupLiveReload(app) {
 }
 
 async function setupDemoMode() {
+  console.log('Copying demo files…');
   async function reset() {
-    const srcDir = `./.data-demo`;
-    const destDir = `./.data-demo-fresh`;
-    await fse.copy(srcDir, destDir);
+    const srcDir = './.data-demo';
+    const destDir = './.data-demo-fresh';
+    await fse
+      .copy(srcDir, destDir)
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
   reset();
 
-  setInterval(async () => {
-    reset();
-  }, 3600 * 1000 * 12);
+  // setInterval(async () => {
+  //   reset();
+  // }, 3600 * 1000 * 12);
 }
 
 // import { compile, compileFromFile } from 'json-schema-to-typescript';

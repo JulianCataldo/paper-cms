@@ -19,6 +19,5 @@
     "swagger-ui": "^4.11.0",
     "swagger-ui-react": "^4.11.0"
   },
-  "type": "module",
-  "devDependencies": {}
+  "type": "module"
 }
