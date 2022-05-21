@@ -14,7 +14,7 @@ Stock definitions are modelled after Schema.org vocabulary.
   - [or… with Docker Compose 🐳](#or-with-docker-compose-)
 - [❄️  Features](#️features)
   - [Auto-generated forms from OpenAPI definitions](#auto-generated-forms-from-openapi-definitions)
-  - [JSON Schema validation on run-time for both client and server](#json-schema-validation-on-run-time-for-both-client-and-server)
+  - [JSON Schema validation on run-time for both client and server sides](#json-schema-validation-on-run-time-for-both-client-and-server-sides)
   - [UI Schema augmentation (non-standard)](#ui-schema-augmentation-non-standard)
   - [JSON files database](#json-files-database)
   - [Image(s) upload + dynamic resize while fetching + caching](#images-upload--dynamic-resize-while-fetching--caching)
@@ -92,13 +92,25 @@ tree ./docker/std/.volume/.data
 
 https://user-images.githubusercontent.com/603498/169503745-7be7124c-5d47-4170-85fb-e32d4ada58bd.mp4
 
-## JSON Schema validation on run-time for both client and server
+## JSON Schema validation on run-time for both client and server sides
 
-…
+https://user-images.githubusercontent.com/603498/169630848-7ca3a1b8-dcd1-4787-a11e-66603b843fb4.mp4
+
+---
+
+Browser and everything in between cannot be trusted for data transmission.  
+In Paper CMS, both sides are taken care of, thanks to AJV and JSON Schema specs.
+
+For example, you might need to do manual data transformation, directly on entry files, skipping the back-office.  
+_Use cases : search and replace, refactoring fields names, automatic external data ingestion…_  
+Everytime a file is read OR written, it will pass through schema validation, so no silent models shifting while refactoring them.
+`additionalProperties: false` can be leveraged to be warn about orphaned fields.
 
 ## UI Schema augmentation (non-standard)
 
 https://user-images.githubusercontent.com/603498/169630096-ce777a5d-15ad-41d7-9360-aea9791d7616.mp4
+
+---
 
 Pure JSON Schema isn't designed (yet?) for declarative UI parameters.  
 Special dialects to cater for this are experimented here and here.  
@@ -182,6 +194,7 @@ solution suitable for projects which:
 - Needs moderate authoring concurrency with silo-ed document edits
 - Might needs frequent content updates
 - Low needs for user-land data input
+- Convention over Configuration with extendabilities (models, widgets…)
 
 To sum up: Paper CMS is good for **editors-driven web sites**, but is not a
 good fit for **users-driven web apps**.
