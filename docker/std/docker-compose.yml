@@ -2,10 +2,14 @@ version: '3.3'
 
 services:
   paper-cms:
+    env_file: .env
+    environment:
+      DEMO_MODE: ${DEMO_MODE:-false}
     build:
       context: ../../
       dockerfile: ./docker/std/Dockerfile
-    volumes:
-      - ./.volume/.data:/usr/app/.data
+    # volumes:
+    # - ./.volume/.data:/usr/app/.data
+    # - ./.volume/.data-demo:/usr/app/.data
     ports:
       - 127.0.0.1:7777:7777

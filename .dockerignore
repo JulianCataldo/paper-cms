@@ -5,4 +5,4 @@
 **/.public
 **/.old
 **/.vscode
-**/docs
+./docs

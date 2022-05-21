@@ -28,18 +28,12 @@
     "server:b": "pnpm esbuild --platform=node --format=esm --bundle ./server/index.js --pure:console.log --external:./server/node_modules/* --minify --outfile=./.dist/server/bundle.js",
     "live-reload": "nodemon -w ./.public -x \"curl localhost:${PORT:-7777}/reload\"",
     "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
-    "dcu:std": "docker compose -f ./docker/std/docker-compose.yml up --build",
-    "dcd:std": "docker compose -f ./docker/std/docker-compose.yml down",
     "release": "standard-version && git push --follow-tags origin master"
   },
   "dependencies": {
     "esbuild": "^0.14.39",
-    "fs-extra": "^10.1.0",
     "nodemon": "^2.0.16",
     "pnpm": "^7.1.0"
-  },
-  "prettier": {
-    "singleQuote": true
   },
   "engines": {
     "node": "17.9"
@@ -47,7 +41,16 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^8.0.0",
+    "prettier": "^2.6.2",
     "standard-version": "^9.5.0"
   },
   "commitlint": {
@@ -55,5 +58,33 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "airbnb"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "import/extensions": "off"
+    }
   }
 }
