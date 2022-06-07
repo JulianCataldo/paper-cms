@@ -21,13 +21,13 @@ export default function setupGetAll({
       const reading = fs
         .readFile(f, 'utf8')
         .then((data) => {
-          const entryRevisions = JSON.parse(data);
-          const valid = validate(entryRevisions[0]);
+          const entry = JSON.parse(data);
+          const valid = validate(entry);
           if (!valid) {
             console.log(validate.errors);
           } else {
             const id = path.basename(f);
-            entries.push({ _id: id, ...entryRevisions[0] });
+            entries.push({ _id: id, ...entry });
           }
         })
         .catch((data) => {

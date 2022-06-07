@@ -33,32 +33,25 @@ export default function setupSave({
 
       const path = process.env.DATA_DIR + `/docs/${collectionName}/${entryId}`;
 
-      const revisions = [entryObj];
-
-      if (paramId !== 'new') {
-        await fs
-          .readFile(path, 'utf8')
-          .then((data) => {
-            const obj = JSON.parse(data);
-            const valid = validate(obj);
-            if (!valid) {
-              console.log(validate.errors);
-            } else {
-              revisions.push(...obj);
-            }
-          })
-          .catch((data) => {
-            console.log('error reading file');
-          });
-      }
-
-      const revisionsSanitized = JSON.stringify(revisions, null, 2)
+      const entryObjSanitized = JSON.stringify(entryObj, null, 2)
         .replace(/<.*script.*>(.*)<.*script.*>/g, '◎')
         .replace(/<.*href.*javascript:.*>.*<.*>/g, '◉');
 
       await fs
-        .writeFile(path, revisionsSanitized)
-        .then(() => {
+        .writeFile(path, entryObjSanitized)
+        .then(async () => {
+          console.log('Committing');
+          const git = simpleGit(process.env.PAPER_DATA_DIR);
+
+          await git.add('.').catch((e) => console.log(e));
+          const user = req.auth.userName;
+          await git
+            .commit(
+              `💾 #Save ( @${user} ) [${collectionName}] [${entryId}]`,
+              // /${collectionName}/${entryId}`
+            )
+            .catch((e) => console.log(e));
+
           res.status(201).send({ success: true, response: { entryId } });
         })
         .catch(() => {

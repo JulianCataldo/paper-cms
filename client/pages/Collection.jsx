@@ -29,7 +29,8 @@ export default function CollectionPage({}) {
 
   function getTableData() {
     return axios.get(collectionURI, { headers }).then(({ data }) => {
-      let dataFiltered = data.map((e) => {
+      console.log({ data });
+      const dataFiltered = data?.map((e) => {
         e._created = e._meta.created;
         e._updated = e._meta.updated;
         e._deleted = e._meta.deleted;

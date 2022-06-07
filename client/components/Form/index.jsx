@@ -19,12 +19,12 @@ export default function FormComponent({ collection, entryId = null }) {
   };
   // console.log({ schemaFiltered });
 
-  const [currentRevIndex, setCurrentRevIndex] = useState(0);
-  const handleRevChange = (event) => {
-    setCurrentRevIndex(parseInt(event.target.value));
-    fetchData();
-    console.log(event.target.value);
-  };
+  // const [currentRevIndex, setCurrentRevIndex] = useState(0);
+  // const handleRevChange = (event) => {
+  //   setCurrentRevIndex(parseInt(event.target.value));
+  //   fetchData();
+  //   console.log(event.target.value);
+  // };
   function fetchData() {
     axios
       .get(`/v1/${collection}/${entryId}?rev`, {
@@ -50,16 +50,19 @@ export default function FormComponent({ collection, entryId = null }) {
   async function submitForm(data) {
     setFormChanged(false);
 
-    const res = await axios.post(
-      `/v1/${collection}/${entryId}`,
-      data.formData,
-      { headers },
-    );
-    console.log(res.data);
+    const res = await axios
+      .post(`/v1/${collection}/${entryId}`, data.formData, { headers })
+      .then(({ data }) => {
+        console.log({ data });
+        return data;
+      })
+      .catch((e) => console.log(e));
 
-    setCurrentRevIndex(0);
+    // console.log({ d: res.reponse });
+
+    // setCurrentRevIndex(0);
     if (entryId === 'new') {
-      navigate(`/e/${collection}/${res?.data?.response?.entryId}`, {});
+      navigate(`/e/${collection}/${res?.response?.entryId}`, {});
     } else {
       fetchData();
     }
@@ -154,7 +157,8 @@ export default function FormComponent({ collection, entryId = null }) {
         // onFocus={handleFormChange}
         onSubmit={submitForm}
         onError={log('errors')}
-        formData={entryData[currentRevIndex]}
+        formData={entryData}
+        // formData={entryData[currentRevIndex]}
         fields={fields}
         // ref={formRef}
         // ref={(f) => {
@@ -162,7 +166,7 @@ export default function FormComponent({ collection, entryId = null }) {
         // }}
       />
 
-      <FormControl>
+      {/* <FormControl>
         <InputLabel id="form-select-label">Revisions</InputLabel>
         <Select
           labelId="form-select-label"
@@ -176,7 +180,7 @@ export default function FormComponent({ collection, entryId = null }) {
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
+      </FormControl> */}
       {/* <Button onClick={sub}>{entryId === 'new' ? 'Save' : 'Update'}</Button> */}
     </div>
   );
