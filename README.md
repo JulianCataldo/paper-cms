@@ -133,8 +133,8 @@ Standard compliant JSON Schema alongside non standard UI Schema.
 
 ## JSON files database
 
-All your textual data is hosted unded `./data/docs` (root can be overriden with `DATA_DIR`).  
-Run multiple instances of Paper CMS easily by setting different `PORT`.  
+All your textual data is hosted unded `./data/docs` (root can be overriden with `PAPER_DATA_DIR`).  
+Run multiple instances of Paper CMS easily by setting different `PAPER_PORT`.  
 Quickly swip datasets : demo / tests / staging / production…
 
 ## Image(s) upload + dynamic resize while fetching + caching
@@ -150,7 +150,7 @@ https://user-images.githubusercontent.com/603498/169494704-6ee7afcb-31f5-4cc5-b1
 When editing **model** definitions, **server** or **client** code, everything is re-runned/builded/bundled.
 Also, browser is automatically refreshed thanks to a long polling web socket.
 
-You can also trigger browser refresh by hitting `curl localhost:${PORT:-7777}/reload`.
+You can also trigger browser refresh by hitting `curl localhost:${PAPER_PORT:-7777}/reload`.
 
 ## Document revisions history
 
@@ -256,7 +256,7 @@ good fit for **users-driven web apps**.
 
 # ℹ️  Project insights
 
-> ⚠️ Work in progress: **NOT FOR PRODUCTION** ⚠️
+> **Warning**: Work in progress: **NOT FOR PRODUCTION**
 
 ## Structure
 
