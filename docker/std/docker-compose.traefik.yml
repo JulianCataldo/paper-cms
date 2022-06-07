@@ -10,20 +10,20 @@ services:
       - ./.volume/.data:/usr/app/.data
     networks:
       - internal
-      - rproxy_daemon
+      - rproxy-traefik_daemon
     environment:
-      DEMO_MODE: ${DEMO_MODE:-false}
+      PAPER_DEMO_MODE: ${PAPER_DEMO_MODE:-false}
     labels:
-      - traefik.docker.network=rproxy_daemon
+      - traefik.docker.network=rproxy-traefik_daemon
       - traefik.http.routers.paper-cms.rule=Host(`${SITE_HOST:?}`)
 
       - traefik.http.routers.paper-cms.entrypoints=websecure
       # - traefik.http.routers.paper-cms.tls=true
       - traefik.http.routers.paper-cms.tls.certresolver=myresolver
-      - traefik.http.services.paper-cms.loadbalancer.server.port=${PORT:-7777}
+      - traefik.http.services.paper-cms.loadbalancer.server.port=${PAPER_PORT:-7777}
 
 networks:
   internal:
     driver: bridge
-  rproxy_daemon:
+  rproxy-traefik_daemon:
     external: true

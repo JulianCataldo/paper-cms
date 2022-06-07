@@ -14,6 +14,8 @@ import http from 'http';
 import loadOpenApiConfig from './config.js';
 
 import setupUpload from './upload.js';
+// import git from './git.js';
+import simpleGit from 'simple-git';
 import setupAuth from './auth.js';
 import setupPages from './pages.js';
 
@@ -22,24 +24,29 @@ import setupGetSingle from './ctx/get-single.js';
 import setupSave from './ctx/save.js';
 import setupDelete from './ctx/delete.js';
 
-if (process.env.DEMO_MODE === 'true') {
-  process.env.DATA_DIR = './.data-demo-fresh';
+const MODE = process.env.MODE || 'local';
+const env = `${process.cwd()}/.env.${MODE}`;
+dotenv.config({ path: env });
+
+if (process.env.PAPER_DEMO_MODE === 'true') {
+  process.env.PAPER_DATA_DIR = './.data-demo-fresh';
 } else {
-  process.env.DATA_DIR = process.env.DATA_DIR
-    ? `${process.env.DATA_DIR}/.data`
-    : './.data';
+  process.env.PAPER_DATA_DIR =
+    process.env.PAPER_DATA_DIR || `${process.cwd()}/.data`;
 }
-process.env.TOKEN_SECRET = process.env.TOKEN_SECRET || 'top_secret';
-process.env.ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password';
-process.env.PORT = process.env.PORT || 7777;
-const { PORT } = process.env;
+process.env.PAPER_TOKEN_SECRET = process.env.PAPER_TOKEN_SECRET || 'top_secret';
+process.env.PAPER_ADMIN_PASSWORD =
+  process.env.PAPER_ADMIN_PASSWORD || 'password';
+process.env.PAPER_PORT = process.env.PAPER_PORT || 7777;
+const { PAPER_PORT } = process.env;
+
+process.env.PAPER_STANDALONE = process.env.PAPER_STANDALONE || 'true';
 
 export default async function init() {
   console.log('Starting API…', process.cwd());
+  console.log(`MODE: ${MODE}`);
 
-  dotenv.config();
-
-  if (process.env.DEMO_MODE === 'true') {
+  if (process.env.PAPER_DEMO_MODE === 'true') {
     console.log('Demo mode activated…');
     await setupDemoMode();
   }
@@ -67,7 +74,7 @@ export default async function init() {
       ...config.api[pathKey],
     });
 
-    mkdirp(process.env.DATA_DIR + '/docs/' + pathKey);
+    await mkdirp(process.env.PAPER_DATA_DIR + '/docs/' + pathKey);
 
     const params = {
       app,

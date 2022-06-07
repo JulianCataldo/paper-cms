@@ -4,7 +4,7 @@ services:
   paper-cms:
     env_file: .env
     environment:
-      DEMO_MODE: ${DEMO_MODE:-false}
+      PAPER_DEMO_MODE: ${PAPER_DEMO_MODE:-false}
     build:
       context: ../../
       dockerfile: ./docker/std/Dockerfile
