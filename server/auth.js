@@ -7,7 +7,7 @@ export default function setupAuth({ app, ajv, config }) {
   app.post('/v1/login', async (req, res) => {
     console.log(req.body);
 
-    const files = await glob(`${process.env.DATA_DIR}/docs/User/*`);
+    const files = await glob(`${process.env.PAPER_DATA_DIR}/docs/User/*`);
     console.log({ files });
 
     // const promises = [];
@@ -35,7 +35,7 @@ export default function setupAuth({ app, ajv, config }) {
 
     if (
       req.body.userName === 'admin' &&
-      req.body.password === process.env.ADMIN_PASSWORD
+      req.body.password === process.env.PAPER_ADMIN_PASSWORD
       // entries.find((e) => {
       //   e.userName === "admin"req.body.userName;
       // })
@@ -56,7 +56,7 @@ export default function setupAuth({ app, ajv, config }) {
   });
 
   function generateAccessToken(creds, illimited = false) {
-    return jwt.sign(creds, process.env.TOKEN_SECRET, {
+    return jwt.sign(creds, process.env.PAPER_TOKEN_SECRET, {
       ...(illimited ? {} : { expiresIn: '6600s' }),
     });
   }
@@ -73,7 +73,7 @@ export default function setupAuth({ app, ajv, config }) {
   console.log('====================================================');
 
   return expressjwt({
-    secret: process.env.TOKEN_SECRET,
+    secret: process.env.PAPER_TOKEN_SECRET,
     algorithms: ['HS256'],
   });
 }

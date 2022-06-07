@@ -11,7 +11,7 @@ export default function setupGetAll({
 }) {
   app.get(endpoint, jwtReq, async (req, res) => {
     const files = await glob(
-      process.env.DATA_DIR + `/docs/${collectionName}/*`
+      process.env.PAPER_DATA_DIR + `/docs/${collectionName}/*`,
     );
     console.log({ files });
 

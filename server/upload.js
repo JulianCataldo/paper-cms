@@ -8,7 +8,7 @@ import multer from 'multer';
 export default function setupUpload({ app }) {
   const storage = multer.diskStorage({
     destination(req, file, cb) {
-      cb(null, `${process.env.DATA_DIR}/bin/`);
+      cb(null, `${process.env.PAPER_DATA_DIR}/bin/`);
     },
     filename(req, file, cb) {
       const uniquePrefix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
@@ -16,12 +16,12 @@ export default function setupUpload({ app }) {
     },
   });
 
-  mkdirp(`${process.env.DATA_DIR}/bin/resized/`);
+  mkdirp(`${process.env.PAPER_DATA_DIR}/bin/resized/`);
 
   app.get('/media/:file', async function (req, res) {
     const width = req.query['w'] || 'o';
 
-    const resizedFilePath = `${process.env.DATA_DIR}/bin/resized/w${width}_${req.params.file}`;
+    const resizedFilePath = `${process.env.PAPER_DATA_DIR}/bin/resized/w${width}_${req.params.file}`;
 
     const ext = path.extname(req.params.file).substring(1);
     res.set('Content-Type', `image/${ext}`);
@@ -33,7 +33,7 @@ export default function setupUpload({ app }) {
     } else {
       console.log('resizing…');
       const fileContent = await fs.readFile(
-        `${process.env.DATA_DIR}/bin/${req.params.file}`
+        `${process.env.PAPER_DATA_DIR}/bin/${req.params.file}`,
       );
       const size = [parseInt(width) || null, null];
       const fileResized = await sharp(fileContent)

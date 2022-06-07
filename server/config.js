@@ -7,7 +7,10 @@ export default async function loadOpenApiConfig() {
   let api;
   let uiSchemas;
   try {
-    input = yaml.load(await fs.readFile('./models/api-v1.yaml', 'utf8'));
+    const path = `${import.meta.url
+      .replace('file://', '')
+      .replace('server/config.js', '')}models/api-v1.yaml`;
+    input = yaml.load(await fs.readFile(path, 'utf8'));
   } catch (e) {
     console.log(e);
   }

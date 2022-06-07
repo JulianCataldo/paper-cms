@@ -16,7 +16,10 @@ export default function setupDelete({
     console.log(restoreMode);
 
     const entry = await fs
-      .readFile(process.env.DATA_DIR + `/docs/${collectionName}/${id}`, 'utf8')
+      .readFile(
+        process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${id}`,
+        'utf8',
+      )
       .then((data) => {
         const obj = JSON.parse(data);
         const valid = validate(obj);
@@ -36,7 +39,7 @@ export default function setupDelete({
       entry._meta.deleted = new Date().toISOString();
     }
 
-    const path = process.env.DATA_DIR + `/docs/${collectionName}/${id}`;
+    const path = process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${id}`;
     await fs
       .writeFile(path, JSON.stringify(entry, null, 2))
       .then(() => {

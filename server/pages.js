@@ -20,7 +20,11 @@ export default async function setupPages({ app, config, jwtReq }) {
     res.send(await baseHtml());
   });
 
-  app.use(express.static('./.public'));
+  const publicPath = `${import.meta.url
+    .replace('file://', '')
+    .replace('server/pages.js', '')}.public`;
+  console.log({ publicPath });
+  app.use(express.static(publicPath));
 
   app.get('/info', jwtReq, (req, res) => {
     if (config) {

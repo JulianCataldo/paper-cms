@@ -1,5 +1,7 @@
 import fs from 'fs/promises';
 import rwords from 'random-words';
+// import git from '../git.js';
+import simpleGit from 'simple-git';
 
 export default function setupSave({
   app,
@@ -31,7 +33,8 @@ export default function setupSave({
         paramId === 'new' ? rwords(5).join('-') + '.json' : paramId;
       console.log({ body: req.body, post: endpoint, entryId });
 
-      const path = process.env.DATA_DIR + `/docs/${collectionName}/${entryId}`;
+      const path =
+        process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${entryId}`;
 
       const entryObjSanitized = JSON.stringify(entryObj, null, 2)
         .replace(/<.*script.*>(.*)<.*script.*>/g, '◎')
