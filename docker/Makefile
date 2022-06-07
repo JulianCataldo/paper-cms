@@ -1,18 +1,25 @@
-# Traefik  # RECREATE
+# Traefik
 rdc-std-t: ddc-std-t udc-std-t
-udc-std-t: # UP RE-BUILD
+	@echo ••• RECREATE
+udc-std-t:
+	@echo ••• UP RE-BUILD
 	docker compose -f ./std/docker-compose.traefik.yml up --build
-ddc-std-t: # DOWN
+ddc-std-t:
+	@echo ••• DOWN
 	docker compose -f ./std/docker-compose.traefik.yml down
 
-# Local    # RECREATE
+# Local  
 rdc-std: ddc-std udc-std
-udc-std:   # UP RE-BUILD
+	@echo ••• RECREATE
+udc-std:  
+	@echo ••• UP RE-BUILD
 	docker compose -f ./std/docker-compose.yml up --build
-ddc-std:   # DOWN
+ddc-std:  
+	@echo ••• DOWN
 	docker compose -f ./std/docker-compose.yml down
 
 prune:
+	@echo ••• PRUNE
 	docker volume prune -f         
 	docker system prune -f
 
@@ -20,13 +27,16 @@ prune:
 # …
 #
 
+# Contexts
 ctx-p:
+	@echo ••• SWITCH TO PRODUCTION
 	docker context use production
 ctx-d:
+	@echo ••• SWITCH TO DEFAULT
 	docker context use default
 
-# Production
-# make ctx-p rdc-std-t
-
-# Local
-# make ctx-d rdc-std
+# Deploys
+prod: ctx-p rdc-std-t
+	@echo ••• DEPLOYING PRODUCTION
+local: ctx-d rdc-std
+	@echo ••• DEPLOYING LOCAL
