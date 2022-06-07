@@ -16,6 +16,7 @@
   ],
   "description": "A document-based headless CMS with API + back office",
   "type": "module",
+  "main": "./server/index.js",
   "scripts": {
     "prepare": "husky install",
     "test": "echo 'launching tests…'",
@@ -24,10 +25,10 @@
     "clean:a": "rm -rf ./.public ./.data",
     "client": "pnpm esbuild --bundle ./client/app.jsx --minify --outfile=./.public/assets/browser.js",
     "client:w": "pnpm esbuild --bundle ./client/app.jsx --sourcemap --outfile=./.public/assets/browser.js --watch",
-    "server": "NODE_ENV=production node ./server",
-    "server:w": "pnpm nodemon -e js,yaml ./server/index.js -w ./server -w ./client/base-html.js  -w ./models",
+    "server": "NODE_ENV=production node ./server/index.js",
+    "server:w": "PAPER_STANDALONE='true' pnpm nodemon -e js,yaml ./server/index.js -w ./server -w ./client/base-html.js  -w ./models",
     "server:b": "pnpm esbuild --platform=node --format=esm --bundle ./server/index.js --pure:console.log --external:./server/node_modules/* --minify --outfile=./.dist/server/bundle.js",
-    "live-reload": "nodemon -w ./.public -x \"curl localhost:${PORT:-7777}/reload\"",
+    "live-reload": "nodemon -w ./.public -x \"curl localhost:${PAPER_PORT:-7777}/reload\"",
     "dev": "pnpm server:w & pnpm client:w & pnpm live-reload",
     "release": "standard-version && git push --follow-tags origin master"
   },
@@ -62,7 +63,18 @@
   },
   "prettier": {
     "singleQuote": true,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "overrides": [
+      {
+        "files": [
+          "**/*.css",
+          "**/*.scss"
+        ],
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
   },
   "eslintConfig": {
     "env": {
@@ -71,6 +83,7 @@
       "node": true
     },
     "extends": [
+      "plugin:prettier/recommended",
       "plugin:react/recommended",
       "airbnb"
     ],
