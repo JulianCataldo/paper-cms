@@ -19,6 +19,7 @@ paths:
 components:
   schemas:
     WebPage:
+      # $schema: https://schema.org/WebPage
       title: Web page
       properties:
         name:
@@ -28,17 +29,32 @@ components:
         url:
           title: URL
           type: string
-        subType:
+        x-subType:
           title: Sub type
-          type: string
-          default: Default
-          enum:
-            - Default
-            - Collection
-            - Item
-            - ProfilePage
-            - ContactPage
-            - Custom
+          type: object
+          properties:
+            choice:
+              title: Choice
+              type: string
+              default: Default
+              enum:
+                - Default
+                - Collection
+                - Item
+                - Profile
+                - Contact
+                - Custom
+          dependencies:
+            choice:
+              oneOf:
+                - properties:
+                    choice:
+                      enum:
+                        - Custom
+                    name:
+                      title: Name
+                      type: string
+
         hasPart:
           title: Parts
           items:
@@ -54,13 +70,14 @@ components:
           type: array
         _meta:
           '$ref': '#/$defs/Meta'
+
       additionalProperties: false
       type: object
       required:
-        - name
-        - subType
-        - url
         - _meta
+        - name
+        - url
+        - x-subType
 
     WebSite:
       title: Web site
