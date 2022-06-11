@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let conf = { paths: [] };
+let conf = { api: { paths: [], components: {} } };
 const headers = {
   Authorization: 'Bearer ' + localStorage.getItem('jwt'),
 };
