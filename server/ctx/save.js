@@ -22,7 +22,7 @@ export default function setupSave({
         [dateActionOverride]: new Date().toISOString(),
       },
     };
-    console.log({ paramId, entryObj });
+    // console.log({ paramId, entryObj });
 
     const valid = validate(entryObj);
     if (!valid) {
@@ -31,12 +31,19 @@ export default function setupSave({
     } else {
       const entryId =
         paramId === 'new' ? rwords(5).join('-') + '.json' : paramId;
-      console.log({ body: req.body, post: endpoint, entryId });
+      // console.log({ body: req.body, post: endpoint, entryId });
 
       const path =
         process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${entryId}`;
 
-      const entryObjSanitized = JSON.stringify(entryObj, null, 2)
+      const entryObjOrdered = Object.keys(entryObj)
+        .sort()
+        .reduce((obj, key) => {
+          obj[key] = entryObj[key];
+          return obj;
+        }, {});
+
+      const entryObjSanitized = JSON.stringify(entryObjOrdered, null, 2)
         .replace(/<.*script.*>(.*)<.*script.*>/g, '◎')
         .replace(/<.*href.*javascript:.*>.*<.*>/g, '◉');
 

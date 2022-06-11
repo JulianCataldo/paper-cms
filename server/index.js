@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 
 import mkdirp from 'mkdirp';
 
+import fs from 'fs/promises';
 import fse from 'fs-extra';
 
 import Ajv from 'ajv';
@@ -114,15 +115,17 @@ if (process.env.PAPER_STANDALONE === 'true') {
 }
 
 async function setupGit() {
+  await fs
+    .writeFile(process.env.PAPER_DATA_DIR + '/.gitignore', 'bin/*')
+    .catch((e) => console.log(fse));
+
   const git = simpleGit(process.env.PAPER_DATA_DIR);
   await git.init();
   await git.addConfig('user.name', 'PCMS_Admin');
   await git.addConfig('user.email', 'admin@admin.xyz');
 
-  await git
-    .log()
-    .catch((e) => console.log(e))
-    .then((r) => console.log({ r: r?.all }));
+  await git.log().catch((e) => console.log(e));
+  // .then((r) => console.log({ r: r?.all }));
 }
 
 function setupLiveReload(app) {
