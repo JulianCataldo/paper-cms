@@ -8,16 +8,16 @@ export default function setupDelete({
   jwtReq,
 }) {
   app.delete(`${endpoint}/:id`, jwtReq, async (req, res) => {
-    const id = req.params['id'];
+    const { id } = req.params;
 
     console.log(id);
-    const restoreMode = req.query['restore'] ? true : false;
+    const restoreMode = !!req.query.restore;
 
     console.log(restoreMode);
 
     const entry = await fs
       .readFile(
-        process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${id}`,
+        `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${id}`,
         'utf8',
       )
       .then((data) => {
@@ -25,12 +25,12 @@ export default function setupDelete({
         const valid = validate(obj);
         if (!valid) {
           console.log(validate.errors);
-        } else {
-          return obj;
+          return false;
         }
+        return obj;
       })
-      .catch((data) => {
-        console.log('error reading file');
+      .catch((e) => {
+        console.log(e);
       });
 
     if (restoreMode) {
@@ -39,7 +39,7 @@ export default function setupDelete({
       entry._meta.deleted = new Date().toISOString();
     }
 
-    const path = process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${id}`;
+    const path = `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${id}`;
     await fs
       .writeFile(path, JSON.stringify(entry, null, 2))
       .then(() => {

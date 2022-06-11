@@ -11,7 +11,7 @@ export default function setupGetAll({
 }) {
   app.get(endpoint, jwtReq, async (req, res) => {
     const files = await glob(
-      process.env.PAPER_DATA_DIR + `/docs/${collectionName}/*`,
+      `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/*`,
     );
     // console.log({ files });
 
@@ -30,8 +30,8 @@ export default function setupGetAll({
             entries.push({ _id: id, ...entry });
           }
         })
-        .catch((data) => {
-          console.log('error reading file');
+        .catch((e) => {
+          console.log(e);
         });
       promises.push(reading);
     });

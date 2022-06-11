@@ -11,7 +11,7 @@ export default function setupSave({
   jwtReq,
 }) {
   app.post(`${endpoint}/:id`, jwtReq, async (req, res) => {
-    const paramId = req.params['id'];
+    const paramId = req.params.id;
     const dateActionOverride = paramId === 'new' ? 'created' : 'updated';
     const entryObj = {
       ...req.body,
@@ -30,11 +30,10 @@ export default function setupSave({
       res.status(400).send({ success: false, response: validate.errors });
     } else {
       const entryId =
-        paramId === 'new' ? rwords(5).join('-') + '.json' : paramId;
+        paramId === 'new' ? `${rwords(5).join('-')}.json` : paramId;
       // console.log({ body: req.body, post: endpoint, entryId });
 
-      const path =
-        process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${entryId}`;
+      const path = `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${entryId}`;
 
       const entryObjOrdered = Object.keys(entryObj)
         .sort()

@@ -8,13 +8,13 @@ export default function setupGetSingle({
   jwtReq,
 }) {
   app.get(`${endpoint}/:id`, jwtReq, async (req, res) => {
-    const id = req.params['id'];
+    const { id } = req.params;
     // console.log({ id });
-    const withRevisions = req.query['rev'] !== undefined ? true : false;
+    // const withRevisions = req.query.rev !== undefined;
 
     const entry = await fs
       .readFile(
-        process.env.PAPER_DATA_DIR + `/docs/${collectionName}/${id}`,
+        `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${id}`,
         'utf8',
       )
       .then((data) => {
@@ -22,12 +22,12 @@ export default function setupGetSingle({
         const valid = validate(obj);
         if (!valid) {
           console.log(validate.errors);
-        } else {
-          return obj;
+          return false;
         }
+        return obj;
       })
-      .catch((data) => {
-        console.log('error reading file');
+      .catch((e) => {
+        console.log(e);
       });
 
     if (entry) {

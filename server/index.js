@@ -12,11 +12,11 @@ import addFormats from 'ajv-formats';
 import { Server } from 'socket.io';
 import http from 'http';
 
+import simpleGit from 'simple-git';
 import loadOpenApiConfig from './config.js';
 
 import setupUpload from './upload.js';
 // import git from './git.js';
-import simpleGit from 'simple-git';
 import setupAuth from './auth.js';
 import setupPages from './pages.js';
 
@@ -76,7 +76,8 @@ export default async function init() {
         ...config.api[pathKey],
       });
 
-      await mkdirp(process.env.PAPER_DATA_DIR + '/docs/' + pathKey);
+      // eslint-disable-next-line no-await-in-loop
+      await mkdirp(`${process.env.PAPER_DATA_DIR}/docs/${pathKey}`);
 
       const params = {
         app,
@@ -116,8 +117,8 @@ if (process.env.PAPER_STANDALONE === 'true') {
 
 async function setupGit() {
   await fs
-    .writeFile(process.env.PAPER_DATA_DIR + '/.gitignore', 'bin/*')
-    .catch((e) => console.log(fse));
+    .writeFile(`${process.env.PAPER_DATA_DIR}/.gitignore`, 'bin/*')
+    .catch((e) => console.log(e));
 
   const git = simpleGit(process.env.PAPER_DATA_DIR);
   await git.init();

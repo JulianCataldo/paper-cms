@@ -18,8 +18,8 @@ export default function setupUpload({ app }) {
 
   mkdirp(`${process.env.PAPER_DATA_DIR}/bin/resized/`);
 
-  app.get('/media/:file', async function (req, res) {
-    const width = req.query['w'] || 'o';
+  app.get('/media/:file', async function getMedia(req, res) {
+    const width = req.query.w || 'o';
 
     const resizedFilePath = `${process.env.PAPER_DATA_DIR}/bin/resized/w${width}_${req.params.file}`;
 
@@ -35,7 +35,7 @@ export default function setupUpload({ app }) {
       const fileContent = await fs.readFile(
         `${process.env.PAPER_DATA_DIR}/bin/${req.params.file}`,
       );
-      const size = [parseInt(width) || null, null];
+      const size = [parseInt(width, 10) || null, null];
       const fileResized = await sharp(fileContent)
         .resize(size[0], size[1], { withoutEnlargement: true })
         .toBuffer();

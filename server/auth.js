@@ -1,4 +1,4 @@
-import glob from 'glob-promise';
+// import glob from 'glob-promise';
 import jwt from 'jsonwebtoken';
 import { expressjwt } from 'express-jwt';
 
@@ -7,7 +7,7 @@ export default function setupAuth({ app, ajv, config }) {
   app.post('/v1/login', async (req, res) => {
     console.log(req.body);
 
-    const files = await glob(`${process.env.PAPER_DATA_DIR}/docs/User/*`);
+    // const files = await glob(`${process.env.PAPER_DATA_DIR}/docs/User/*`);
     // console.log({ files });
 
     // const promises = [];

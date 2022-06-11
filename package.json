@@ -98,7 +98,11 @@
       "react"
     ],
     "rules": {
-      "import/extensions": "off"
+      "import/extensions": "off",
+      "guard-for-in": "off",
+      "no-underscore-dangle": "off",
+      "no-use-before-define": "off",
+      "no-restricted-syntax": "off"
     }
   }
 }
