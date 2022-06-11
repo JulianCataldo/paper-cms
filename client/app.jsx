@@ -30,29 +30,33 @@ async function init() {
     console.log({ confApp: conf });
 
     root.render(
-      <App>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/v1/ui" element={<ApiUI />} />
-            <Route path="/settings" element={<HomePage />} />
-            <Route path="/definitions" element={<HomePage />} />
-            <Route path="/users" element={<HomePage />} />
-            <Route path="/e/:collection" element={<CollectionPage />} />
-            <Route path="/e/:collection/:id" element={<ItemPage />} />
-          </Routes>
-        </BrowserRouter>
-      </App>
+      <React.StrictMode>
+        <App>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/v1/ui" element={<ApiUI />} />
+              <Route path="/settings" element={<HomePage />} />
+              <Route path="/definitions" element={<HomePage />} />
+              <Route path="/users" element={<HomePage />} />
+              <Route path="/e/:collection" element={<CollectionPage />} />
+              <Route path="/e/:collection/:id" element={<ItemPage />} />
+            </Routes>
+          </BrowserRouter>
+        </App>
+      </React.StrictMode>,
     );
   } else {
     root.render(
-      <App>
-        <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<LoginPage />} />
-          </Routes>
-        </BrowserRouter>
-      </App>
+      <React.StrictMode>
+        <App>
+          <BrowserRouter>
+            <Routes>
+              <Route path="*" element={<LoginPage />} />
+            </Routes>
+          </BrowserRouter>
+        </App>
+      </React.StrictMode>,
     );
   }
 }
