@@ -65,29 +65,37 @@ export default async function init() {
 
   setupUpload({ app });
 
-  for (const pathKey in config?.api?.paths) {
-    const endpoint = `/v1/${pathKey}`;
-    console.log({ post: endpoint });
+  async function traverse(obj) {
+    for (const pathKey in obj) {
+      const endpoint = `/v1/${pathKey}`;
+      console.log({ post: endpoint });
 
-    const validate = ajv.compile({
-      $defs: config.api,
-      ...config.api[pathKey],
-    });
+      const validate = ajv.compile({
+        $defs: config.api,
+        ...config.api[pathKey],
+      });
 
-    await mkdirp(process.env.PAPER_DATA_DIR + '/docs/' + pathKey);
+      await mkdirp(process.env.PAPER_DATA_DIR + '/docs/' + pathKey);
 
-    const params = {
-      app,
-      collectionName: pathKey,
-      validate,
-      endpoint,
-      jwtReq,
-    };
-    setupGetAll(params);
-    setupGetSingle(params);
-    setupSave(params);
-    setupDelete(params);
+      const params = {
+        app,
+        collectionName: pathKey,
+        validate,
+        endpoint,
+        jwtReq,
+      };
+      setupGetAll(params);
+      setupGetSingle(params);
+      setupSave(params);
+      setupDelete(params);
+
+      if (typeof obj[pathKey] === 'object') {
+        traverse(obj[pathKey]);
+      }
+    }
   }
+  await traverse(config?.api?.paths);
+
   const server = setupLiveReload(app);
   await new Promise((resolve) => {
     server.listen(PAPER_PORT, () => {

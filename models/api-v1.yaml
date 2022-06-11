@@ -1,83 +1,75 @@
+# Kindof "Inheritance": https://github.com/json-schema-org/json-schema-spec/issues/348#issuecomment-322940347
+
 # openapi: "3.0.0"
 info:
   version: 1.0.0
   title: CMS
 servers:
   - url: http://localhost:7777/v1
+
 paths:
-  WebSite: ''
-  Person: ''
-  WebPage: ''
-  WebPageElement: ''
-  CreativeWork: ''
-  Organization: ''
-  MediaObject: ''
-  Collection: ''
-  SocialMediaPosting: ''
+  Thing:
+    CreativeWork:
+      WebContent:
+        WebPageElement: ''
+        WebSite: ''
+        WebPage: ''
+      Article:
+        TechArticle: ''
+        SatiricalArticle: ''
+        SocialMediaPosting:
+          BlogPosting:
+            LiveBlogPosting: ''
+          DiscussionForumPosting: ''
+        NewsArticle:
+          AnalysisNewsArticle: ''
+          AskPublicNewsArticle: ''
+          BackgroundNewsArticle: ''
+          OpinionNewsArticle: ''
+          ReportageNewsArticle: ''
+          ReviewNewsArticle: ''
+      MediaObject: ''
+      Collection: ''
+
+    Person: ''
+    Organization: ''
   User: ''
 
 components:
   schemas:
+
+    Thing:
+      properties:
+        url:
+          title: URL
+          type: string
+        description:
+          title: Description
+          type: string
+
     WebPage:
       # $schema: https://schema.org/WebPage
       title: Web page
       properties:
-        name:
-          title: Name
-          'ui:autofocus': true
-          type: string
+        # name:
+        #   title: Name
+        #   'ui:autofocus': true
+        #   type: string
         url:
-          title: URL
-          type: string
-        x-subType:
-          title: Sub type
-          type: object
-          properties:
-            choice:
-              title: Choice
-              type: string
-              default: Default
-              enum:
-                - Default
-                - Collection
-                - Item
-                - Profile
-                - Contact
-                - Custom
-          dependencies:
-            choice:
-              oneOf:
-                - properties:
-                    choice:
-                      enum:
-                        - Custom
-                    name:
-                      title: Name
-                      type: string
+          '$ref': '#/$defs/Thing/properties/url'
+        # hasPart:
+        #   '$ref': '#/$defs/HasPart'
 
-        hasPart:
-          title: Parts
-          items:
-            'ui:field': 'hyperlink'
-            properties:
-              '$ref':
-                type: string
-                pattern: '/(WebPageElement)/(.*).json'
-            additionalProperties: false
-            type: object
-            required:
-              - '$ref'
-          type: array
-        _meta:
-          '$ref': '#/$defs/Meta'
+        # _meta:
+        #   '$ref': '#/$defs/Meta'
 
-      additionalProperties: false
+      # additionalProperties: false
       type: object
-      required:
-        - _meta
-        - name
-        - url
-        - x-subType
+      # required:
+      #   - _meta
+      #   - name
+      #   - url
+      #   - x-subType
 
     WebSite:
       title: Web site
@@ -87,25 +79,12 @@ components:
           'ui:autofocus': true
           type: string
         url:
-          title: URL
-          type: string
+          '$ref': '#/$defs/Thing/properties/url'
         description:
           'ui:field': richText
-          title: Description
-          type: string
+          '$ref': '#/$defs/Thing/properties/description'
         hasPart:
-          title: Pages
-          items:
-            'ui:field': 'hyperlink'
-            properties:
-              '$ref':
-                type: string
-                pattern: '/(WebPage)/(.*).json'
-            additionalProperties: false
-            type: object
-            required:
-              - '$ref'
-          type: array
+          '$ref': '#/$defs/HasPart'
         _meta:
           '$ref': '#/$defs/Meta'
       additionalProperties: false
@@ -118,7 +97,7 @@ components:
     WebPageElement:
       title: Web page element
       properties:
-        Text:
+        text:
           title: Text
           'ui:field': richText
           type: string
@@ -223,9 +202,38 @@ components:
     SocialMediaPosting:
       title: Social media posting
       properties:
-        url:
-          title: URL
+        # url:
+        #   '$ref': '#/$defs/Url'
+        articleBody:
+          title: Article body
+          'ui:autofocus': true
+          'ui:widget': 'textarea'
           type: string
+        sharedContent:
+          title: Associated medias
+          items:
+            'ui:field': 'hyperlink'
+            properties:
+              '$ref':
+                type: string
+                pattern: '/(MediaObject)/(.*).json'
+            additionalProperties: false
+            type: object
+            required:
+              - '$ref'
+          type: array
+        _meta:
+          '$ref': '#/$defs/Meta'
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    DiscussionForumPosting:
+      title: Discussion forum posting
+      properties:
+        # url:
+        #   '$ref': '#/$defs/Url'
         articleBody:
           title: Article body
           'ui:autofocus': true
@@ -288,6 +296,107 @@ components:
       required:
         - _meta
 
+    Article:
+      title: Article
+      properties:
+        headline:
+          'ui:autofocus': true
+          type: string
+          title: Headline
+        alternativeHeadline:
+          type: string
+          title: Alt headline
+        articleSection:
+          title: Section(s)
+          description: Subject(s)
+          items:
+            type: string
+          type: array
+        keywords:
+          title: Tags
+          description: Keywords(s)
+          items:
+            type: string
+          type: array
+        hasPart:
+          title: Parts
+          items:
+            'ui:field': 'hyperlink'
+            properties:
+              '$ref':
+                type: string
+                pattern: '/(WebPageElement)/(.*).json'
+            additionalProperties: false
+            type: object
+            required:
+              - '$ref'
+          type: array
+        # url:
+        #   '$ref': '#/$defs/Url'
+
+        _meta:
+          '$ref': '#/$defs/Meta'
+      # additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    NewsArticle:
+      title: News article
+      properties: {}
+      allOf:
+        # - properties:
+        #     foobar:
+        #       type: string
+        - '$ref': '#/$defs/Article'
+    AnalysisNewsArticle:
+      title: Analysis news article
+      properties: {}
+      allOf:
+        # - properties:
+        #     foobar:
+        #       type: string
+        - '$ref': '#/$defs/Article'
+    AskPublicNewsArticle:
+      title: Ask public news article
+      properties: {}
+      allOf:
+        # - properties:
+        #     foobar:
+        #       type: string
+        - '$ref': '#/$defs/Article'
+    BackgroundNewsArticle:
+      title: Background news article
+      properties: {}
+      allOf:
+        # - properties:
+        #     foobar:
+        #       type: string
+        - '$ref': '#/$defs/Article'
+    OpinionNewsArticle:
+      title: Opinion news article
+      allOf:
+        # - properties:
+        #     foobar:
+        #       type: string
+        - '$ref': '#/$defs/Article'
+
+    ReportageNewsArticle:
+      title: Reportage news article
+      properties: {}
+      allOf:
+        # - properties:
+        #     foobar:
+        #       type: string
+        - '$ref': '#/$defs/Article'
+    ReviewNewsArticle:
+      title: Review news article
+      properties: {}
+      allOf:
+        # - properties:
+        #     foobar:
+        #       type: string
+        - '$ref': '#/$defs/Article'
     User:
       properties:
         userName:
@@ -304,3 +413,64 @@ components:
       type: object
       required:
         - _meta
+
+    HasPart:
+      title: Parts
+      items:
+        'ui:field': 'hyperlink'
+        properties:
+          '$ref':
+            type: string
+            pattern: '/(WebPageElement)/(.*).json'
+        additionalProperties: false
+        type: object
+        required:
+          - '$ref'
+      type: array
+
+    # Url:
+    #   title: URL
+    #   type: string
+
+
+        # x-subType:
+        #   title: Sub type
+        #   type: object
+        #   properties:
+        #     choice:
+        #       title: Choice
+        #       type: string
+        #       default: Default
+        #       enum:
+        #         - Default
+        #         - Collection
+        #         - Item
+        #         - Profile
+        #         - Contact
+        #         - Custom
+        #   dependencies:
+        #     choice:
+        #       oneOf:
+        #         - properties:
+        #             choice:
+        #               enum:
+        #                 - Custom
+        #             name:
+        #               title: Name
+        #               type: string
+        # x-subType:
+        #   title: Sub type
+        #   type: object
+        #   properties:
+        #     choice:
+        #       title: Choice
+        #       type: string
+        #       default: Default
+        #       enum:
+        #         - NewsArticle
+        #         - AnalysisNewsArticle
+        #         - AskPublicNewsArticle
+        #         - BackgroundNewsArticle
+        #         - OpinionNewsArticle
+        #         - ReportageNewsArticle
+        #         - ReviewNewsArticle
