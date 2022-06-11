@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/JulianCataldo/paper-cms/compare/v0.0.5...v0.0.6) (2022-06-11)
+
+
+### Features
+
+* definitions hierarchy ([0d0fec7](https://github.com/JulianCataldo/paper-cms/commit/0d0fec780151585e870f620238c82bdaf03de4d1))
+* enclosing in react strict mode ([e0026f4](https://github.com/JulianCataldo/paper-cms/commit/e0026f41821953302aa91ba9559662615dfc9b43))
+* git revisions ([661d31a](https://github.com/JulianCataldo/paper-cms/commit/661d31a03325c074ef66cdabe7f36e183efa5d59))
+* helmet titles ([474facb](https://github.com/JulianCataldo/paper-cms/commit/474facbadca03947bff8992dd804afc42640aa51))
+* subtype def ([6aea339](https://github.com/JulianCataldo/paper-cms/commit/6aea339cf37ba29bf5750a3b92b0292979045bfc))
+* ts types generation from json-schema ([ce25ab5](https://github.com/JulianCataldo/paper-cms/commit/ce25ab5795353d26bd129d9d0e432d1c792080f5))
+
+
+### Bug Fixes
+
+* app title ([6cdb02f](https://github.com/JulianCataldo/paper-cms/commit/6cdb02f15a13fcfc8e6131f5b25afc6dcd41cb01))
+* bit better media uploader widget ([9b615c1](https://github.com/JulianCataldo/paper-cms/commit/9b615c138728f9f083b66bcd879498113293683f))
+* conf initial state ([271c4e5](https://github.com/JulianCataldo/paper-cms/commit/271c4e5f8ef6eb7bda60f7a1d613a18f79b269c5))
+* ignore binaries in git data revisions ([97d87c9](https://github.com/JulianCataldo/paper-cms/commit/97d87c926519d60237436b4bfd75f7f04ebbdcad))
+
 ### [0.0.5](https://github.com/JulianCataldo/paper-cms/compare/v0.0.4...v0.0.5) (2022-05-21)
 
 
