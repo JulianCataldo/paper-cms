@@ -9,7 +9,7 @@ export default function setupGetSingle({
 }) {
   app.get(`${endpoint}/:id`, jwtReq, async (req, res) => {
     const id = req.params['id'];
-    console.log({ id });
+    // console.log({ id });
     const withRevisions = req.query['rev'] !== undefined ? true : false;
 
     const entry = await fs
@@ -31,7 +31,7 @@ export default function setupGetSingle({
       });
 
     if (entry) {
-      console.log({ entry });
+      // console.log({ entry });
       // res.send(withRevisions ? entry : entry[0]);
       res.send(entry);
     } else {

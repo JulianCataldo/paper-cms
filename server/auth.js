@@ -8,7 +8,7 @@ export default function setupAuth({ app, ajv, config }) {
     console.log(req.body);
 
     const files = await glob(`${process.env.PAPER_DATA_DIR}/docs/User/*`);
-    console.log({ files });
+    // console.log({ files });
 
     // const promises = [];
     // const entries = [];

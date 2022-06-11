@@ -13,7 +13,7 @@ export default function setupGetAll({
     const files = await glob(
       process.env.PAPER_DATA_DIR + `/docs/${collectionName}/*`,
     );
-    console.log({ files });
+    // console.log({ files });
 
     const promises = [];
     const entries = [];

@@ -20,6 +20,7 @@ export default async function setupPages({ app, config, jwtReq }) {
     res.send(await baseHtml());
   });
 
+  // REFACTOR: use URL API
   const publicPath = `${import.meta.url
     .replace('file://', '')
     .replace('server/pages.js', '')}.public`;
