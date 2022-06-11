@@ -122,7 +122,12 @@ export default function CollectionPage({}) {
 
   return (
     <Base>
-      <Helmet>{/* <title>{current?.pluralLabel}</title> */}</Helmet>
+      <Helmet>
+        <title>
+          {(conf.api.components.schemas[collection]?.title || collection) +
+            ' | Collection'}
+        </title>
+      </Helmet>
       <Typography
         variant="h2"
         component="h2"

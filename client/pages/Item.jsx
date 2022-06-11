@@ -13,11 +13,11 @@ export default function ItemPage() {
   return (
     <Base>
       <Helmet>
-        <title>{collection}</title>
+        <title>{collection + ' | ' + (id === 'new' ? 'New' : 'Edit')}</title>
       </Helmet>
 
       <Typography variant="h2" component="h2" sx={{ pt: '2rem', pl: '2rem' }}>
-        {id === 'new' && 'New '}
+        {id === 'new' ? 'New ' : 'Edit '}
 
         {conf.api.components.schemas[collection]?.title || collection}
       </Typography>
