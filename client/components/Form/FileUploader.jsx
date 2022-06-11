@@ -31,7 +31,9 @@ export default function FileUploader(props) {
   return (
     <>
       <Typography variant="h5">{props.schema.title}</Typography>
-      <Container>
+      <Box
+        sx={{ display: 'flex', alignItems: 'center', p: 4, flexWrap: 'wrap' }}
+      >
         {/* <div>Salut {props.formData}</div> */}
         <Box
           component="img"
@@ -40,29 +42,33 @@ export default function FileUploader(props) {
             width: 350,
             maxHeight: { xs: 233, md: 167 },
             maxWidth: { xs: 350, md: 250 },
+            objectFit: 'contain',
           }}
           src={props.formData || ''}
         />
-        <Input
-          type="text"
-          value={props.formData}
-          // onChange={props.onChange}
-          // readOnly
-        />
-        <Box>
-          <input
-            style={{ display: 'none' }}
-            id="contained-button-file"
-            type="file"
-            onChange={uploadFile}
+        <Box sx={{ p: 4, flexGrow: 1 }}>
+          <Input
+            type="text"
+            value={props.formData}
+            fullWidth
+            // onChange={props.onChange}
+            // readOnly
           />
-          <label htmlFor="contained-button-file">
-            <Button variant="contained" color="primary" component="span">
-              Upload
-            </Button>
-          </label>
+          <Box sx={{ p: 4 }}>
+            <input
+              style={{ display: 'none' }}
+              id="contained-button-file"
+              type="file"
+              onChange={uploadFile}
+            />
+            <label htmlFor="contained-button-file">
+              <Button variant="contained" color="primary" component="span">
+                Upload
+              </Button>
+            </label>
+          </Box>
         </Box>
-      </Container>
+      </Box>
     </>
   );
 }
