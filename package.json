@@ -33,25 +33,25 @@
     "release": "standard-version && git push --follow-tags origin master"
   },
   "dependencies": {
-    "esbuild": "^0.14.39",
+    "esbuild": "^0.14.43",
     "nodemon": "^2.0.16",
-    "pnpm": "^7.1.0"
+    "pnpm": "^7.2.0"
   },
   "engines": {
     "node": "17.9"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.0",
-    "@commitlint/config-conventional": "^17.0.0",
-    "eslint": "^7.32.0 || ^8.2.0",
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "eslint": "^8.17.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "husky": "^8.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "husky": "^8.0.1",
     "prettier": "^2.6.2",
     "standard-version": "^9.5.0"
   },
@@ -83,9 +83,9 @@
       "node": true
     },
     "extends": [
-      "plugin:prettier/recommended",
+      "airbnb",
       "plugin:react/recommended",
-      "airbnb"
+      "plugin:prettier/recommended"
     ],
     "parserOptions": {
       "ecmaFeatures": {
