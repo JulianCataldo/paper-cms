@@ -42,7 +42,7 @@ export default function baseHtml() {
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>App</title>
+        <title>Paper CMS</title>
         <link rel="stylesheet" href="/assets/browser.css" />
       </head>
 
