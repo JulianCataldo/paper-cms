@@ -12,4 +12,4 @@ services:
     # - ./.volume/.data:/usr/app/.data
     # - ./.volume/.data-demo:/usr/app/.data-demo
     ports:
-      - 127.0.0.1:7777:7777
+      - 127.0.0.1:${PAPER_DOCKER_LOCAL_PORT:?7777}:7777
