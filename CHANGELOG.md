@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/JulianCataldo/paper-cms/compare/v0.0.6...v0.0.7) (2022-06-12)
+
+
+### Bug Fixes
+
+* deps and script ([56c5ad9](https://github.com/JulianCataldo/paper-cms/commit/56c5ad902f7fa33611470c18d968db7ca6cb061c))
+
 ### [0.0.6](https://github.com/JulianCataldo/paper-cms/compare/v0.0.5...v0.0.6) (2022-06-11)
 
 
