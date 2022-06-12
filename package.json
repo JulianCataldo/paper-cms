@@ -20,7 +20,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "echo 'launching tests…'",
-    "deps:i": "npm i pnpm && pnpm -r i",
+    "deps:i": "npm i -g pnpm && pnpm -r i",
     "clean": "rm -rf ./.public",
     "clean:a": "rm -rf ./.public ./.data",
     "client": "pnpm esbuild --bundle ./client/app.jsx --minify --outfile=./.public/assets/browser.js",
