@@ -35,7 +35,7 @@ export default async function loadOpenApiConfig() {
       unreachableDefinitions: true,
     }).then((result) => {
       fs.writeFile('./models/types.ts', result);
-      console.log(result);
+      // console.log(result);
     });
 
     return { api, uiSchemas };
