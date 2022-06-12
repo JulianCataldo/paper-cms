@@ -3,24 +3,24 @@ rdc-std-t: ddc-std-t udc-std-t
 	@echo ••• RECREATE
 udc-std-t:
 	@echo ••• UP RE-BUILD
-	docker compose -f ./std/docker-compose.traefik.yml up --build
+	docker compose -f ./standard/docker-compose.traefik.yml up --build
 ddc-std-t:
 	@echo ••• DOWN
-	docker compose -f ./std/docker-compose.traefik.yml down
+	docker compose -f ./standard/docker-compose.traefik.yml down
 
-# Local  
+# Local
 rdc-std: ddc-std udc-std
 	@echo ••• RECREATE
-udc-std:  
+udc-std:
 	@echo ••• UP RE-BUILD
-	docker compose -f ./std/docker-compose.yml up --build
-ddc-std:  
+	docker compose -f ./standard/docker-compose.yml up --build
+ddc-std:
 	@echo ••• DOWN
-	docker compose -f ./std/docker-compose.yml down
+	docker compose -f ./standard/docker-compose.yml down
 
 prune:
 	@echo ••• PRUNE
-	docker volume prune -f         
+	docker volume prune -f
 	docker system prune -f
 
 # Bundled

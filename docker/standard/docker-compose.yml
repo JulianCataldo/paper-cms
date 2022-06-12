@@ -7,9 +7,10 @@ services:
       PAPER_DEMO_MODE: ${PAPER_DEMO_MODE:-false}
     build:
       context: ../../
-      dockerfile: ./docker/std/Dockerfile
-    # volumes:
-    # - ./.volume/.data:/usr/app/.data
+      dockerfile: ./docker/standard/Dockerfile
+    volumes:
+      - ./.volume/data:/usr/app/.data
     # - ./.volume/.data-demo:/usr/app/.data-demo
+    # - ./caches:/root/.local/share/pnpm/store/v3
     ports:
       - 127.0.0.1:${PAPER_DOCKER_LOCAL_PORT:?7777}:7777

@@ -13,6 +13,8 @@ RUN npm run deps:i
 
 COPY ./ ./
 
-RUN npm run client
+# Build static browser assets
+RUN pnpm run client
 
-CMD npm run server
+# Run back office + API server
+CMD pnpm run server
