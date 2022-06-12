@@ -2,15 +2,21 @@ version: '3.3'
 
 services:
   paper-cms:
-    env_file: .env
+    # env_file: .env
     environment:
       PAPER_DEMO_MODE: ${PAPER_DEMO_MODE:-false}
     build:
       context: ../../
       dockerfile: ./docker/standard/Dockerfile
     volumes:
-      - ./.volume/data:/usr/app/.data
+      - ${DOCKER_PAPER_DATA_DIR:-./.volume/data}:/usr/app/.data
     # - ./.volume/.data-demo:/usr/app/.data-demo
     # - ./caches:/root/.local/share/pnpm/store/v3
     ports:
-      - 127.0.0.1:${PAPER_DOCKER_LOCAL_PORT:?7777}:7777
+      - 127.0.0.1:${DOCKER_PAPER_PORT:-7787}:7777
+    networks:
+      - private
+
+networks:
+  private:
+    driver: bridge
