@@ -5,9 +5,10 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type Name = string;
 export type URL = string;
 export type Description = string;
-export type Name = string;
+export type Name1 = string;
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
  * via the `definition` "HasPart".
@@ -16,11 +17,11 @@ export type Parts = {
   $ref: string;
 }[];
 export type Text = string;
-export type Name1 = string;
+export type Name2 = string;
 export type GivenName = string;
 export type FamilyName = string;
 export type Email = string;
-export type Name2 = string;
+export type Name3 = string;
 export type AssociatedMedias = {
   $ref: string;
 }[];
@@ -36,7 +37,7 @@ export type FileURL = string;
 /**
  * The name of a friend
  */
-export type Name3 = string;
+export type Name4 = string;
 export type Email1 = string;
 export type Brand = string;
 export type Headline = string;
@@ -89,6 +90,18 @@ export type ReportageNewsArticle = Article;
 export type ReviewNewsArticle = Article;
 export type UserName = string;
 export type Password = string;
+export type IsActuallyRented = boolean;
+export type AmenityFeatureS = ("TV" | "Beamer" | "Wifi" | "Ethernet" | "Snacks" | "PA Speakers")[];
+export type FloorSurfaceAreaInM = number;
+export type MaximumAttendeeCapacity = number;
+export type PermittedUsage = string;
+export type IsAccessibleForFree = boolean;
+export type PublicAccess = boolean;
+export type SmokingAllowed = boolean;
+export type LeaseLength = number;
+export type PetsAllowed = boolean;
+export type Address = string;
+export type TelephoneNumber = number;
 
 export interface AllDefs {
   [k: string]: unknown;
@@ -98,6 +111,7 @@ export interface AllDefs {
  * via the `definition` "Thing".
  */
 export interface Thing {
+  name?: Name;
   url?: URL;
   description?: Description;
   [k: string]: unknown;
@@ -115,7 +129,7 @@ export interface WebPage {
  * via the `definition` "WebSite".
  */
 export interface WebSite {
-  name: Name;
+  name: Name1;
   url: URL;
   description?: Description;
   hasPart?: Parts;
@@ -136,7 +150,7 @@ export interface Metadata {
  */
 export interface WebPageElement {
   text?: Text;
-  name?: Name1;
+  name?: Name2;
   _meta: Metadata;
 }
 /**
@@ -165,7 +179,7 @@ export interface CreativeWork {
  * via the `definition` "Collection".
  */
 export interface Collection {
-  name?: Name2;
+  name?: Name3;
   associatedMedia?: AssociatedMedias;
   _meta: Metadata;
 }
@@ -200,7 +214,7 @@ export interface MediaObject {
  * via the `definition` "Organization".
  */
 export interface Organization {
-  name?: Name3;
+  name?: Name4;
   email?: Email1;
   brand?: Brand;
   _meta: Metadata;
@@ -225,5 +239,26 @@ export interface Article {
 export interface User {
   userName?: UserName;
   password?: Password;
+  _meta: Metadata;
+}
+/**
+ * This interface was referenced by `AllDefs`'s JSON-Schema
+ * via the `definition` "Room".
+ */
+export interface Room {
+  "x-rented"?: IsActuallyRented;
+  name?: Name;
+  description?: Description;
+  amenityFeature?: AmenityFeatureS;
+  floorSize?: FloorSurfaceAreaInM;
+  maximumAttendeeCapacity?: MaximumAttendeeCapacity;
+  permittedUsage?: PermittedUsage;
+  isAccessibleForFree?: IsAccessibleForFree;
+  publicAccess?: PublicAccess;
+  smokingAllowed?: SmokingAllowed;
+  leaseLength?: LeaseLength;
+  petsAllowed?: PetsAllowed;
+  address?: Address;
+  telephone?: TelephoneNumber;
   _meta: Metadata;
 }

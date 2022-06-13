@@ -10,7 +10,7 @@ servers:
 paths:
   Thing:
     CreativeWork:
-      WebContent:
+      'Web content':
         WebPageElement: ''
         WebSite: ''
         WebPage: ''
@@ -33,6 +33,10 @@ paths:
 
     Person: ''
     Organization: ''
+    Place:
+      Accommodation:
+        Room: ''
+
   User: ''
 
 components:
@@ -40,6 +44,9 @@ components:
 
     Thing:
       properties:
+        name:
+          title: Name
+          type: string
         url:
           title: URL
           type: string
@@ -413,6 +420,80 @@ components:
       type: object
       required:
         - _meta
+
+    Room:
+      properties:
+        # Might find a native Schema.org prop' with RentAction?
+        x-rented:
+          title: Is actually rented?
+          type: boolean
+
+        name:
+          'ui:autofocus': true
+          '$ref': '#/$defs/Thing/properties/name'
+        description:
+          'ui:field': richText
+          '$ref': '#/$defs/Thing/properties/description'
+
+        # photo:
+        #   type: string
+
+        amenityFeature:
+          title: Amenity feature(s)
+          items:
+            type: string
+            enum:
+              - TV
+              - Beamer
+              - Wifi
+              - Ethernet
+              - Snacks
+              - PA Speakers
+
+          uniqueItems: true
+          type: array
+
+        floorSize:
+          title: Floor surface area in M²
+          type: number
+        maximumAttendeeCapacity:
+          title: Maximum attendee capacity
+          type: number
+        permittedUsage:
+          title: Permitted usage
+          'ui:field': richText
+          type: string
+        isAccessibleForFree:
+          title: Is accessible for free?
+          type: boolean
+        publicAccess:
+          title: Public access?
+          type: boolean
+        smokingAllowed:
+          title: Smoking allowed?
+          type: boolean
+        leaseLength:
+          title: Lease length
+          type: number
+        petsAllowed:
+          title: Pets allowed?
+          type: boolean
+        address:
+          title: Address
+          type: string
+        telephone:
+          title: Telephone number
+          type: number
+
+        _meta:
+          '$ref': '#/$defs/Meta'
+
+      additionalProperties: false
+      type: object
+      required:
+        - _meta
+
+    # ------------------------------------------------------------------------
 
     HasPart:
       title: Parts
