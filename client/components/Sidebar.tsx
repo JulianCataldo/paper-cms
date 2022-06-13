@@ -21,7 +21,14 @@ export interface IProps {
   drawerWidth: string;
 }
 
-const expandedInitial = ['Thing', 'CreativeWork', 'Article', 'WebContent'];
+const expandedInitial = [
+  'Thing',
+  'CreativeWork',
+  // 'Article',
+  'Web content',
+  'Place',
+  'Accommodation',
+];
 export default function Sidebar({ drawerWidth }: IProps) {
   // const { id, collection } = useParams();
   const [expanded, setExpanded] = React.useState<string[]>(expandedInitial);
