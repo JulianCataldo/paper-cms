@@ -7,7 +7,7 @@ docker/.volume
 
 docker/bundle
 .vscode
-.old
+*.old
 _opt
 
 node_modules
