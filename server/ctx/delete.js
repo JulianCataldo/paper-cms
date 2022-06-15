@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 
 export default function setupDelete({
   app,
-  collectionName,
+  collection,
   validate,
   endpoint,
   jwtReq,
@@ -17,7 +17,7 @@ export default function setupDelete({
 
     const entry = await fs
       .readFile(
-        `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${id}`,
+        `${process.env.PAPER_DATA_DIR}/docs/${collection}/${id}`,
         'utf8',
       )
       .then((data) => {
@@ -39,7 +39,7 @@ export default function setupDelete({
       entry._meta.deleted = new Date().toISOString();
     }
 
-    const path = `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${id}`;
+    const path = `${process.env.PAPER_DATA_DIR}/docs/${collection}/${id}`;
     await fs
       .writeFile(path, JSON.stringify(entry, null, 2))
       .then(() => {

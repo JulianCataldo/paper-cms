@@ -4,14 +4,14 @@ import fs from 'fs/promises';
 
 export default function setupGetAll({
   app,
-  collectionName,
+  collection,
   validate,
   endpoint,
   jwtReq,
 }) {
   app.get(endpoint, jwtReq, async (req, res) => {
     const files = await glob(
-      `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/*`,
+      `${process.env.PAPER_DATA_DIR}/docs/${collection}/*`,
     );
     // console.log({ files });
 
@@ -29,7 +29,7 @@ export default function setupGetAll({
             const id = path.basename(f);
             entries.push({
               ...entry,
-              _meta: { id, collectionName, ...entry._meta },
+              _meta: { id, collection, ...entry._meta },
             });
           }
         })

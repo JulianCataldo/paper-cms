@@ -5,7 +5,7 @@ import simpleGit from 'simple-git';
 
 export default function setupSave({
   app,
-  collectionName,
+  collection,
   validate,
   endpoint,
   jwtReq,
@@ -33,7 +33,7 @@ export default function setupSave({
         paramId === 'new' ? `${rwords(5).join('-')}.json` : paramId;
       // console.log({ body: req.body, post: endpoint, entryId });
 
-      const path = `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${entryId}`;
+      const path = `${process.env.PAPER_DATA_DIR}/docs/${collection}/${entryId}`;
 
       const entryObjOrdered = Object.keys(entryObj)
         .sort()
@@ -56,8 +56,8 @@ export default function setupSave({
           const user = req.auth.userName;
           await git
             .commit(
-              `💾 #Save ( @${user} ) [${collectionName}] [${entryId}]`,
-              // /${collectionName}/${entryId}`
+              `💾 #Save ( @${user} ) [${collection}] [${entryId}]`,
+              // /${collection}/${entryId}`
             )
             .catch((e) => console.log(e));
 

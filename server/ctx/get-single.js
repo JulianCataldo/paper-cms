@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 
 export default function setupGetSingle({
   app,
-  collectionName,
+  collection,
   validate,
   endpoint,
   jwtReq,
@@ -14,7 +14,7 @@ export default function setupGetSingle({
 
     const entry = await fs
       .readFile(
-        `${process.env.PAPER_DATA_DIR}/docs/${collectionName}/${id}`,
+        `${process.env.PAPER_DATA_DIR}/docs/${collection}/${id}`,
         'utf8',
       )
       .then((data) => {
@@ -33,7 +33,11 @@ export default function setupGetSingle({
     if (entry) {
       // console.log({ entry });
       // res.send(withRevisions ? entry : entry[0]);
-      res.send(entry);
+      const entryWithMeta = {
+        ...entry,
+        _meta: { id, collection, ...entry._meta },
+      };
+      res.send(entryWithMeta);
     } else {
       console.log('Not found');
       res.status(404).send({ success: false, msg: 'Entry not found' });

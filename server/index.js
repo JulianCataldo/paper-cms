@@ -81,7 +81,7 @@ export default async function init() {
 
       const params = {
         app,
-        collectionName: pathKey,
+        collection: pathKey,
         validate,
         endpoint,
         jwtReq,
