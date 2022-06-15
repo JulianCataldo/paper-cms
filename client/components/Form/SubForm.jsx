@@ -86,7 +86,7 @@ export default function SubForm(props) {
     const entries = [];
     types.forEach(async (type) => {
       const prom = axios.get(`/v1/${type}`, { headers }).then(({ data }) => {
-        const filtered = data.map((e) => `/${type}/${e._id}`);
+        const filtered = data.map((e) => `/${type}/${e._meta.id}`);
         entries.push(...filtered);
         console.log({ filtered });
       });
@@ -125,7 +125,7 @@ export default function SubForm(props) {
     const res = await axios.post(
       `/v1/${currentEntryState.type}/${currentEntryState.id}`,
       data.formData,
-      { headers }
+      { headers },
     );
     console.log(res.data);
 

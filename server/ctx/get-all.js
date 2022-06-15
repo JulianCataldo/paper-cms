@@ -27,7 +27,10 @@ export default function setupGetAll({
             console.log(validate.errors);
           } else {
             const id = path.basename(f);
-            entries.push({ _id: id, ...entry });
+            entries.push({
+              ...entry,
+              _meta: { id, collectionName, ...entry._meta },
+            });
           }
         })
         .catch((e) => {

@@ -154,7 +154,7 @@ export default function CollectionPage({}) {
           rows={tableData}
           columns={columns}
           // isCellEditable={true}
-          getRowId={(row) => row._id}
+          getRowId={(row) => row._meta.id}
           // checkboxSelection
           disableSelectionOnClick
           initialState={{
