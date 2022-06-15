@@ -1,0 +1,8 @@
+BackgroundNewsArticle:
+  title: Background news article
+  properties: {}
+  allOf:
+    # - properties:
+    #     foobar:
+    #       type: string
+    - '$ref': '#/$defs/Article'

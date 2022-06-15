@@ -1,0 +1,26 @@
+CreativeWork:
+  title: Creative work
+  properties:
+    name:
+      'ui:autofocus': true
+      type: string
+    author:
+      title: Author(s)
+      items:
+        'ui:field': 'hyperlink'
+        properties:
+          '$ref':
+            type: string
+            pattern: '/(Person|Organization)/(.*).json'
+        additionalProperties: false
+        type: object
+        required:
+          - '$ref'
+      type: array
+
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta

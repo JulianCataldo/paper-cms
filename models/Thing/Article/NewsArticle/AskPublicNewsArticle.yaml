@@ -1,0 +1,8 @@
+AskPublicNewsArticle:
+  title: Ask public news article
+  properties: {}
+  allOf:
+    # - properties:
+    #     foobar:
+    #       type: string
+    - '$ref': '#/$defs/Article'

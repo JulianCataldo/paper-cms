@@ -1,0 +1,20 @@
+Organization:
+  properties:
+    name:
+      'ui:autofocus': true
+      type: string
+      title: Name
+      description: The name of a friend
+    email:
+      title: Email
+      type: string
+      format: email
+    brand:
+      title: Brand
+      type: string
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta

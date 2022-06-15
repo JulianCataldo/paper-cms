@@ -8,7 +8,6 @@
 export type Name = string;
 export type URL = string;
 export type Description = string;
-export type Name1 = string;
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
  * via the `definition` "HasPart".
@@ -16,41 +15,35 @@ export type Name1 = string;
 export type Parts = {
   $ref: string;
 }[];
-export type Text = string;
-export type Name2 = string;
-export type GivenName = string;
-export type FamilyName = string;
-export type Email = string;
-export type Name3 = string;
-export type AssociatedMedias = {
-  $ref: string;
-}[];
-export type ArticleBody = string;
-export type AssociatedMedias1 = {
-  $ref: string;
-}[];
-export type ArticleBody1 = string;
-export type AssociatedMedias2 = {
-  $ref: string;
-}[];
-export type FileURL = string;
-/**
- * The name of a friend
- */
-export type Name4 = string;
-export type Email1 = string;
-export type Brand = string;
 export type Headline = string;
 export type AltHeadline = string;
+export type URLSReferences = string[];
 /**
  * Subject(s)
  */
-export type SectionS = string[];
+export type SectionS = (
+  | "Society"
+  | "Economy"
+  | "Politics"
+  | "International"
+  | "Opinion"
+  | "Health"
+  | "Technology"
+  | "Investigation"
+  | "Science"
+  | "Sports"
+  | "Culture"
+  | "Lifestyle"
+)[];
 /**
  * Keywords(s)
  */
 export type Tags = string[];
 export type Parts1 = {
+  $ref: string;
+}[];
+export type ArticleBody = string;
+export type AssociatedMedias = {
   $ref: string;
 }[];
 /**
@@ -88,8 +81,31 @@ export type ReportageNewsArticle = Article;
  * via the `definition` "ReviewNewsArticle".
  */
 export type ReviewNewsArticle = Article;
-export type UserName = string;
-export type Password = string;
+export type ArticleBody1 = string;
+export type AssociatedMedias1 = {
+  $ref: string;
+}[];
+export type AuthorS = {
+  $ref: string;
+}[];
+export type Name1 = string;
+export type AssociatedMedias2 = {
+  $ref: string;
+}[];
+export type FileURL = string;
+export type Name2 = string;
+export type Text = string;
+export type Name3 = string;
+export type Name4 = string;
+/**
+ * The name of a friend
+ */
+export type Name5 = string;
+export type Email = string;
+export type Brand = string;
+export type GivenName = string;
+export type FamilyName = string;
+export type Email1 = string;
 export type IsActuallyRented = boolean;
 export type AmenityFeatureS = ("TV" | "Beamer" | "Wifi" | "Ethernet" | "Snacks" | "PA Speakers")[];
 export type FloorSurfaceAreaInM = number;
@@ -102,6 +118,8 @@ export type LeaseLength = number;
 export type PetsAllowed = boolean;
 export type Address = string;
 export type TelephoneNumber = number;
+export type UserName = string;
+export type Password = string;
 
 export interface AllDefs {
   [k: string]: unknown;
@@ -118,25 +136,6 @@ export interface Thing {
 }
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "WebPage".
- */
-export interface WebPage {
-  url?: URL;
-  [k: string]: unknown;
-}
-/**
- * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "WebSite".
- */
-export interface WebSite {
-  name: Name1;
-  url: URL;
-  description?: Description;
-  hasPart?: Parts;
-  _meta: Metadata;
-}
-/**
- * This interface was referenced by `AllDefs`'s JSON-Schema
  * via the `definition` "Meta".
  */
 export interface Metadata {
@@ -146,21 +145,34 @@ export interface Metadata {
 }
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "WebPageElement".
+ * via the `definition` "Article".
  */
-export interface WebPageElement {
-  text?: Text;
-  name?: Name2;
+export interface Article {
+  headline?: Headline;
+  alternativeHeadline?: AltHeadline;
+  sameAs?: URLSReferences;
+  articleSection?: SectionS;
+  keywords?: Tags;
+  hasPart?: Parts1;
+  _meta: Metadata;
+  [k: string]: unknown;
+}
+/**
+ * This interface was referenced by `AllDefs`'s JSON-Schema
+ * via the `definition` "DiscussionForumPosting".
+ */
+export interface DiscussionForumPosting {
+  articleBody?: ArticleBody;
+  sharedContent?: AssociatedMedias;
   _meta: Metadata;
 }
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "Person".
+ * via the `definition` "SocialMediaPosting".
  */
-export interface Person {
-  givenName?: GivenName;
-  familyName?: FamilyName;
-  email?: Email;
+export interface SocialMediaPosting {
+  articleBody?: ArticleBody1;
+  sharedContent?: AssociatedMedias1;
   _meta: Metadata;
 }
 /**
@@ -169,9 +181,7 @@ export interface Person {
  */
 export interface CreativeWork {
   name?: string;
-  author?: {
-    $ref: string;
-  }[];
+  author?: AuthorS;
   _meta: Metadata;
 }
 /**
@@ -179,26 +189,8 @@ export interface CreativeWork {
  * via the `definition` "Collection".
  */
 export interface Collection {
-  name?: Name3;
-  associatedMedia?: AssociatedMedias;
-  _meta: Metadata;
-}
-/**
- * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "SocialMediaPosting".
- */
-export interface SocialMediaPosting {
-  articleBody?: ArticleBody;
-  sharedContent?: AssociatedMedias1;
-  _meta: Metadata;
-}
-/**
- * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "DiscussionForumPosting".
- */
-export interface DiscussionForumPosting {
-  articleBody?: ArticleBody1;
-  sharedContent?: AssociatedMedias2;
+  name?: Name1;
+  associatedMedia?: AssociatedMedias2;
   _meta: Metadata;
 }
 /**
@@ -211,35 +203,61 @@ export interface MediaObject {
 }
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
+ * via the `definition` "WebPage".
+ */
+export interface WebPage {
+  name?: Name2;
+  url?: URL;
+  hasPart?: Parts;
+  _meta?: Metadata;
+  [k: string]: unknown;
+}
+/**
+ * This interface was referenced by `AllDefs`'s JSON-Schema
+ * via the `definition` "WebPageElement".
+ */
+export interface WebPageElement {
+  text?: Text;
+  name?: Name3;
+  _meta: Metadata;
+}
+/**
+ * This interface was referenced by `AllDefs`'s JSON-Schema
+ * via the `definition` "WebSite".
+ */
+export interface WebSite {
+  name: Name4;
+  url: URL;
+  description?: Description;
+  hasPart?: Parts;
+  _meta: Metadata;
+}
+/**
+ * This interface was referenced by `AllDefs`'s JSON-Schema
  * via the `definition` "Organization".
  */
 export interface Organization {
-  name?: Name4;
-  email?: Email1;
+  name?: Name5;
+  email?: Email;
   brand?: Brand;
   _meta: Metadata;
 }
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "Article".
+ * via the `definition` "Person".
  */
-export interface Article {
-  headline?: Headline;
-  alternativeHeadline?: AltHeadline;
-  articleSection?: SectionS;
-  keywords?: Tags;
-  hasPart?: Parts1;
+export interface Person {
+  givenName?: GivenName;
+  familyName?: FamilyName;
+  email?: Email1;
   _meta: Metadata;
-  [k: string]: unknown;
 }
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
- * via the `definition` "User".
+ * via the `definition` "Accommodation".
  */
-export interface User {
-  userName?: UserName;
-  password?: Password;
-  _meta: Metadata;
+export interface Accommodation {
+  [k: string]: unknown;
 }
 /**
  * This interface was referenced by `AllDefs`'s JSON-Schema
@@ -260,5 +278,14 @@ export interface Room {
   petsAllowed?: PetsAllowed;
   address?: Address;
   telephone?: TelephoneNumber;
+  _meta: Metadata;
+}
+/**
+ * This interface was referenced by `AllDefs`'s JSON-Schema
+ * via the `definition` "User".
+ */
+export interface User {
+  userName?: UserName;
+  password?: Password;
   _meta: Metadata;
 }

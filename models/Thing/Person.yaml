@@ -1,0 +1,18 @@
+Person:
+  properties:
+    givenName:
+      title: Given name
+      'ui:autofocus': true
+      type: string
+    familyName:
+      title: Family name
+      type: string
+    email:
+      title: Email
+      type: string
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta

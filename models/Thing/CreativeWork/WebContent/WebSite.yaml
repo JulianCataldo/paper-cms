@@ -1,0 +1,22 @@
+WebSite:
+  title: Web site
+  properties:
+    name:
+      title: Name
+      'ui:autofocus': true
+      type: string
+    url:
+      '$ref': '#/$defs/Thing/properties/url'
+    description:
+      'ui:field': richText
+      '$ref': '#/$defs/Thing/properties/description'
+    hasPart:
+      '$ref': '#/$defs/HasPart'
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - name
+    - url
+    - _meta

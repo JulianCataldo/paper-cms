@@ -1,0 +1,29 @@
+DiscussionForumPosting:
+  title: Discussion forum posting
+  properties:
+    # url:
+    #   '$ref': '#/$defs/Url'
+    articleBody:
+      title: Article body
+      'ui:autofocus': true
+      'ui:widget': 'textarea'
+      type: string
+    sharedContent:
+      title: Associated medias
+      items:
+        'ui:field': 'hyperlink'
+        properties:
+          '$ref':
+            type: string
+            pattern: '/(MediaObject)/(.*).json'
+        additionalProperties: false
+        type: object
+        required:
+          - '$ref'
+      type: array
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta

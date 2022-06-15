@@ -1,0 +1,23 @@
+WebPage:
+  # $schema: https://schema.org/WebPage
+  title: Web page
+  properties:
+    name:
+      title: Name
+      'ui:autofocus': true
+      type: string
+    url:
+      '$ref': '#/$defs/Thing/properties/url'
+    hasPart:
+      '$ref': '#/$defs/HasPart'
+
+    _meta:
+      '$ref': '#/$defs/Meta'
+
+  # additionalProperties: false
+  type: object
+  # required:
+  #   - _meta
+  #   - name
+  #   - url
+  #   - x-subType

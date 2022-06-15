@@ -1,0 +1,16 @@
+User:
+  properties:
+    userName:
+      'ui:autofocus': true
+      title: User name
+      type: string
+    password:
+      title: Password
+      type: string
+      format: password
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta

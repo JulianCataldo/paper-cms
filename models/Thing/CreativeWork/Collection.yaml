@@ -1,0 +1,25 @@
+Collection:
+  properties:
+    name:
+      title: Name
+      'ui:autofocus': true
+      type: string
+    associatedMedia:
+      title: Associated medias
+      items:
+        'ui:field': 'hyperlink'
+        properties:
+          '$ref':
+            type: string
+            pattern: '/(MediaObject)/(.*).json'
+        additionalProperties: false
+        type: object
+        required:
+          - '$ref'
+      type: array
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta

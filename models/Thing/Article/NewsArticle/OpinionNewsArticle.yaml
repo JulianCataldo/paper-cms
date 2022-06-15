@@ -1,0 +1,7 @@
+OpinionNewsArticle:
+  title: Opinion news article
+  allOf:
+    # - properties:
+    #     foobar:
+    #       type: string
+    - '$ref': '#/$defs/Article'

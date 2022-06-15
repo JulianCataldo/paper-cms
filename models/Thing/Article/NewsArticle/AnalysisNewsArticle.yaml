@@ -1,0 +1,8 @@
+AnalysisNewsArticle:
+  title: Analysis news article
+  properties: {}
+  allOf:
+    # - properties:
+    #     foobar:
+    #       type: string
+    - '$ref': '#/$defs/Article'

@@ -1,0 +1,15 @@
+MediaObject:
+  title: Media object
+  properties:
+    contentUrl:
+      'ui:field': 'fileUpload'
+      title: File URL
+      type: string
+      # format: uri
+
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta

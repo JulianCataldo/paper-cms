@@ -1,0 +1,64 @@
+Article:
+  title: Article
+  properties:
+    headline:
+      'ui:autofocus': true
+      type: string
+      title: Headline
+    alternativeHeadline:
+      type: string
+      title: Alt headline
+    sameAs:
+      title: URL(s) references
+      items:
+        type: string
+      type: array
+    articleSection:
+      title: Section(s)
+      description: Subject(s)
+      uniqueItems: true
+      type: array
+      items:
+        type: string
+        enum:
+          - Society
+          - Economy
+          - Politics
+          - International
+          - Opinion
+          - Health
+          - Technology
+          - Investigation
+          - Science
+          - Sports
+          - Culture
+          - Lifestyle
+
+    keywords:
+      title: Tags
+      description: Keywords(s)
+      items:
+        type: string
+      type: array
+    hasPart:
+      title: Parts
+      items:
+        'ui:field': 'hyperlink'
+        properties:
+          '$ref':
+            type: string
+            pattern: '/(WebPageElement)/(.*).json'
+        additionalProperties: false
+        type: object
+        required:
+          - '$ref'
+      type: array
+    # url:
+    #   '$ref': '#/$defs/Url'
+
+    _meta:
+      '$ref': '#/$defs/Meta'
+  # additionalProperties: false
+  type: object
+  required:
+    - _meta

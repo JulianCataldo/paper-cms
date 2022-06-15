@@ -1,0 +1,43 @@
+Thing:
+  properties:
+    name:
+      title: Name
+      type: string
+    url:
+      title: URL
+      type: string
+    description:
+      title: Description
+      type: string
+
+Meta:
+  title: Metadata
+  properties:
+    created:
+      type: string
+      format: date-time
+      readOnly: true
+    updated:
+      type: string
+      format: date-time
+      readOnly: true
+    deleted:
+      type: string
+      format: date-time
+      readOnly: true
+  additionalProperties: false
+  type: object
+
+HasPart:
+  title: Parts
+  items:
+    'ui:field': 'hyperlink'
+    properties:
+      '$ref':
+        type: string
+        pattern: '/(Person|Organization)/(.*).json'
+    additionalProperties: false
+    type: object
+    required:
+      - '$ref'
+  type: array

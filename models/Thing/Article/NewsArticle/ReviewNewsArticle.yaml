@@ -1,0 +1,8 @@
+ReviewNewsArticle:
+  title: Review news article
+  properties: {}
+  allOf:
+    # - properties:
+    #     foobar:
+    #       type: string
+    - '$ref': '#/$defs/Article'

@@ -1,0 +1,16 @@
+WebPageElement:
+  title: Web page element
+  properties:
+    text:
+      title: Text
+      'ui:field': richText
+      type: string
+    name:
+      title: Name
+      type: string
+    _meta:
+      '$ref': '#/$defs/Meta'
+  additionalProperties: false
+  type: object
+  required:
+    - _meta
