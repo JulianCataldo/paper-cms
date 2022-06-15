@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { AppBar, Toolbar, Button } from '@mui/material';
+import { AppBar, Toolbar, Button, aA } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Add, ArrowBack, Logout } from '@mui/icons-material';
+import { Add, ArrowBack, ContentCopy, Logout } from '@mui/icons-material';
 
 import { conf } from '../store';
 import TrashEntry from './TrashEntry';
@@ -18,6 +18,12 @@ export default function Navigation({ drawerWidth }) {
   function logout() {
     localStorage.removeItem('jwt');
     location.href = '/login';
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(
+      [collection, id].filter((e) => e !== undefined).join('/'),
+    );
   }
 
   return (
@@ -41,7 +47,6 @@ export default function Navigation({ drawerWidth }) {
               <ArrowBack />
             </Button>
           )}
-
           {id !== 'new' && (
             <>
               <Button
@@ -63,12 +68,20 @@ export default function Navigation({ drawerWidth }) {
               )}
             </>
           )}
+          <Button
+            variant="contained"
+            sx={{ mx: 1 }}
+            onClick={() => copyToClipboard()}
+          >
+            <ContentCopy />
+            Copy path
+          </Button>
           {localStorage.getItem('jwt') && !collection && (
             <Button
               variant="contained"
               sx={{ mx: 1 }}
               color="warning"
-              onClick={logout}
+              onClick={() => logout()}
             >
               <Logout />
               Logout
