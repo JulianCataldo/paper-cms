@@ -41,7 +41,7 @@
     "node": "17.9",
     "pnpm": "7"
   },
-  "packageManager": "pnpm@7.0.0",
+  "packageManager": "pnpm@7.9.3",
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
