@@ -33,7 +33,7 @@
     "release": "standard-version && git push --follow-tags origin master"
   },
   "dependencies": {
-    "esbuild": "^0.14.43",
+    "esbuild": "^0.15.0",
     "nodemon": "^2.0.16",
     "pnpm": "^7.2.0"
   },
